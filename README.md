@@ -1,4 +1,4 @@
-![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=삐따기와 삐약이들의 공부비법&fontAlign=70&fontAlignY=35&color=gradient)
+![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=CS Study&fontAlign=70&fontAlignY=35&color=gradient)
 
 
 # CS 스터디
