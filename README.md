@@ -7,8 +7,8 @@
 
 
 ## 📝 Study Rule
- - When? 매주 토요일 Algorithm 스터디 이후 (11:30~12:00)사이 시작~
- - Where? 코로나니까! 집콕!
+ - When? 매주 토요일 Algorithm 스터디 이후 (11:30-12:00) 사이 시작~
+ - Where? 코로나니까! 집콕! in Google Meet, Discode, Zoom
  - How? 1. 매주 주어진 범위에 대해 각자 자유롭게 학습 및 CS 내용 정리!
  - How? 2. Notion, Blog, Git, 손필기 등 자유롭게 정리한 것 온라인으로 공유할 수 있도록 링크 혹은 다양한 방법으로 준비!
  - How? 3. 각자 매주 공통 범위 내에서 2문제씩 문제 출제 및 문제에 대한 풀이 준비하기!
@@ -19,5 +19,17 @@
 
 ## 📣 공지사항!
  - 7.7 다음 스터디는 7.17(토) 예정!
+ - 7.17 까지 아래 내용 학습!
+ ### Data Structure
+ * Array
+ * LinkedList
+ * HashTable
+ * Stack
+ * Queue
+ * Graph
+ * Tree
+ * 그래프(Graph)와 트리(Tree)의 차이점
+ 
+ - Git 꾸미기는 자유롭게 아무나 하기~
 
 
