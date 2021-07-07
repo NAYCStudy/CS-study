@@ -1,4 +1,7 @@
-# CS 스터디 진행
+![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=삐따기와 삐약이들의 공부비법&fontAlign=70&fontAlignY=35&color=gradient)
+
+
+# CS 스터디
 
 
 ## 1. 매주 CS 학습 범위를 정해서 자유롭게 학습하고 정리하기(정리 내용은 공유할 수 있도록)
