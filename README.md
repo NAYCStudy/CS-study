@@ -1,4 +1,4 @@
-![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=CS Study&fontAlign=70&fontAlignY=35&color=gradient)
+![waving](https://capsule-render.vercel.app/api?type=waving&height=200&text=CS-Study&fontAlign=70&fontAlignY=35&color=gradient)
 
 
 # CS 스터디
