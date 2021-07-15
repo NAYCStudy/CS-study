@@ -35,11 +35,10 @@
   
  
   ### 💡  Linked List
-   - LinkedList는 ArrayList와 함께 List를 구체화한 클래스입니다.
-   - ArrayList는 배열을 이용하여 List를 구현한 클래스입니다.
    - LinkedList는 다음과 같이 표현됩니다.  
    ![linkedlist](./images/linkedlist.png)
-   
+   - LinkedList는 ArrayList와 함께 List를 구체화한 클래스입니다.
+   - ArrayList는 배열을 이용하여 List를 구현한 클래스입니다.
    - 각 정보는 노드 내 데이터를 담는 파트에 저장되어있습니다.
    - 노드는 데이터와 함께 다음노드(next), 이전노드(prev)와 연결되어 있습니다.
    - 장점 : 삽입, 삭제가 빠릅니다. 어느 위치에 삽입, 삭제가 일어나도 해당 노드와 연결된 노드만 관리하면 됩니다.
@@ -57,3 +56,6 @@
 
 
 -----
+
+
+:arrow_forward: [테스트](../Readme.md)
