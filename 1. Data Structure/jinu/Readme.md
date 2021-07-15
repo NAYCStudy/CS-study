@@ -69,17 +69,18 @@
   - #### 단점 : 공간 복잡도(메모리 사용)가 큽니다. 순서가 없으므로 순차적 작업이 필요할 때는 효율성이 떨어집니다.
 
   <br><br>
-  * 해시테이블? 해시맵?
-  -> 우리는 자바에서 주로 HashMap을 통해 Key, Value 쌍 데이터를 저장하고 사용합니다.
-  -> HashTable과 HashMap의 차이는 동기화를 지원하는가? 여부에 있습니다.
-   -> HashTable : 동기화 지원 / HashMap : 동기화 미지원
+  * 해시테이블? 해시맵?  
+   -> 우리는 자바에서 주로 HashMap을 통해 Key, Value 쌍 데이터를 저장하고 사용합니다.  
+   -> HashTable과 HashMap의 차이는 동기화를 지원하는가? 여부에 있습니다.   
+   -> HashTable : 동기화 지원 / HashMap : 동기화 미지원  
   <br>
   put(삽입) 작업에서 HashTable과 HashMap의 차이
-  ```
-  // 해시테이블의 put
-  public synchronized V put(K key, V value) { // Make sure the value is not null
+  <br>
+
+```
+  public synchronized V put(K key, V value) {
         if (value == null) { throw new NullPointerException(); }
-        // Makes sure the key is not already in the hashtable.
+        
         Entry<?,?> tab[] = table;
         int hash = key.hashCode();
         int index = (hash & 0x7FFFFFFF) % tab.length;
@@ -91,18 +92,23 @@
             } } addEntry(hash, key, value, index); return null; 
     } 
     
-    // 해시맵의 put 
+    
     public V put(K key, V value) {
         return putVal(hash(key), key, value, false, true);
     }
-  ```
+```
   
   HashTable은 Synchronized 키워드가 붙어있는 것과 같이 병렬 프로그래밍 시 동기화를 지원합니다.
   병렬 처리를 고려한다면 HashTable을 그렇지 않다면 HashMap을 사용하면 됩니다.
   
+  <br><br>
   
+  ### 💡  Stack
+   - 스택 자료구조는 다음과 같습니다.
+   - 자료에 대한 접근이 최상단 top으로 제한적이며 한쪽 방향으로 삽입하고 같은 방향으로 꺼내는 구조입니다.
+   - Ex. A > B > C 순으로 스택에 데이터를 담았다면 C > B> A 순으로 스택으로부터 뽑아내게 됩니다.
+   - 
   
-  💡  Stack
   💡  Queue
   💡  Graph
   💡  Tree
