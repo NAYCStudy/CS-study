@@ -38,6 +38,7 @@
    - LinkedList는 ArrayList와 함께 List를 구체화한 클래스입니다.
    - ArrayList는 배열을 이용하여 List를 구현한 클래스입니다.
    - LinkedList는 다음과 같이 표현됩니다.
+   ![linkedlist](./images/linkedlist.png)
    
    - 
    
