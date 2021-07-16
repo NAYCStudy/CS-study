@@ -36,7 +36,7 @@
  
   ### 💡  Linked List
    - LinkedList는 다음과 같이 표현됩니다.    
-    <img src="./images/linkedlist.png" width="40%">
+    <img src="./images/linkedlist.png" width="40%">  
    - LinkedList는 ArrayList와 함께 List를 구체화한 클래스입니다.
    - ArrayList는 배열을 이용하여 List를 구현한 클래스입니다.
    - 각 정보는 노드 내 데이터를 담는 파트에 저장되어있습니다.
@@ -105,7 +105,7 @@
   
   ### 💡  Stack
    - 스택 자료구조는 다음과 같습니다.  
-   <img src="./images/stack.png" width="40%">
+   <img src="./images/stack.png" width="40%">  
    - 자료에 대한 접근이 최상단 top으로 제한적이며 한쪽 방향으로 삽입하고 같은 방향으로 꺼내는 LIFO 구조입니다.
    - Ex. A > B > C 순으로 스택에 데이터를 담았다면 C > B> A 순으로 스택으로부터 뽑아내게 됩니다.
    - #### 장점 : 구조가 단순하여 top에 대한 쓰기/읽기 속도가 빠릅니다.
@@ -125,11 +125,11 @@
    <br><br>
    
   ###💡  Queue
-   - 먼저 넣은 데이터가 먼저 나오는 FIFO 구조의 자료구조입니다.
-   <img src="./images/queue.png" width="40%">
-   - 스택과 반대되는 개념입니다.
-   - 먼저 줄을 선 사람이 먼저 나갈 수 있는 상황과 같다고 생각하면 됩니다.
-   - 선형 큐, 환형 큐, Linked 큐 등이 있으며 우리가 주로 사용하는 것은 LinkedList 로 구현된 큐입니다.
+   - 먼저 넣은 데이터가 먼저 나오는 FIFO 구조의 자료구조입니다.  
+   <img src="./images/queue.png" width="40%">  
+   - 스택과 반대되는 개념입니다.  
+   - 먼저 줄을 선 사람이 먼저 나갈 수 있는 상황과 같다고 생각하면 됩니다.  
+   - 선형 큐, 환형 큐, Linked 큐 등이 있으며 우리가 주로 사용하는 것은 LinkedList 로 구현된 큐입니다.  
    
 <br><br>
     
