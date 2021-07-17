@@ -18,8 +18,9 @@
 
 
 ## 📣 공지사항!
- - 7.7 다음 스터디는 7.17(토) 예정!
- - 7.17 까지 아래 내용 학습!
+ - 7.17 다음 스터디는 7.25(일) 11:30 예정!
+ - 7.25 까지 아래 내용 학습!
+ - 7.25 까지 각자 '질문모음집'에 문제 해결해보기! + 질문사항 자유롭게 ReadMe.md 에 추가!
  ### Data Structure
  * Array
  * LinkedList
@@ -29,9 +30,16 @@
  * Graph
  * Tree
  * 그래프(Graph)와 트리(Tree)의 차이점
+ -- Array ~ Graph & Tree Diff 까지 추가 정리할 사람들은 서로 정리한거 자유롭게 공유하면서 정리++ 하기!
+ * Binary Heap
+ * Red-Black Tree
+ * B+ Tree 
+ -- Tree 깊이있게 공부해보기!
+ 
+ <br>
  
  - Git 꾸미기는 자유롭게 아무나 하기~
 
-
-  Ref.  
+ <br>
+  ### Ref.  
   https://github.com/WeareSoft/tech-interview#1-data-structure
