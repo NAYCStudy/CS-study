@@ -26,7 +26,7 @@
   ### Solve
 
   #### 1.
-  :arrow_forward: [LinkedList 보러가기](./LinkedList/Readme.md)
+  :arrow_forward: [LinkedList 보러가기](../jinu/LinkedList/Readme.md)
   <br>
   Node 객체는 만들어져 있다고 가정   
   <br>
