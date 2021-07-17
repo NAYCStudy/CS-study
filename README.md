@@ -29,17 +29,22 @@
  * Queue
  * Graph
  * Tree
- * 그래프(Graph)와 트리(Tree)의 차이점
- -- Array ~ Graph & Tree Diff 까지 추가 정리할 사람들은 서로 정리한거 자유롭게 공유하면서 정리++ 하기!
+ * 그래프(Graph)와 트리(Tree)의 차이점  
+ 
+ -- Array ~ Graph & Tree Diff 까지 추가 정리할 사람들은 서로 정리한거 자유롭게 공유하면서 정리++ 하기!  
+ 
  * Binary Heap
  * Red-Black Tree
- * B+ Tree 
- -- Tree 깊이있게 공부해보기!
+ * B+ Tree   
+ 
+  -- Tree 깊이있게 공부해보기!
  
  <br>
  
  - Git 꾸미기는 자유롭게 아무나 하기~
 
- <br>
-  ### Ref.  
+  <br>
+  
+  ### Ref.    
+  
   https://github.com/WeareSoft/tech-interview#1-data-structure
