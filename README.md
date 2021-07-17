@@ -33,3 +33,5 @@
  - Git 꾸미기는 자유롭게 아무나 하기~
 
 
+  Ref.  
+  https://github.com/WeareSoft/tech-interview#1-data-structure
