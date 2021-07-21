@@ -77,7 +77,7 @@
    <br>  
 
    #### 4. 시간복잡도  
-   - 조회 : O(N)
+   - 순차 조회, 랜덤 액세스 : O(N)
    - 삽입, 삭제 : O(1)
 
    <br>  
@@ -98,8 +98,34 @@
    integers1.remove(5);  // '5' 값을 가지고 있는 첫번째 노드를 삭제합니다.         integers1 = {10}
    ```
    
-  <br><br>
+  <br>
   
+  #### 6. ArrayList와 LinkedList 사이 차이점  
+  <img src="./images/arraylist_linkedlist.jpg" width="40%">  
+  
+  - ArrayList  
+   -> 내부적으로 배열을 사용하여 인덱스를 통한 랜덤 액세스가 빠릅니다.  
+   -> 데이터의 추가 삭제가 LinkedList보다 느립니다.  
+   -> ArrayList는 내부적으로 배열을 사용하기에 크기가 한정되어 결국 포화 상태에 이를 수 있으며, ArrayList의 Size 조정은 많은 연산량이 요구됩니다.  
+   
+  - LinkedList
+   -> LinkedList는 AbstractSequentialList를 상속하여 자료의 주소 값으로 노드끼리 서로 링크를 통해 연결된 구조입니다.  
+   -> 데이터의 추가, 삭제가 상대적으로 빠릅니다.  
+   -> LinkedList는 논리적으로 무한의 개수의 자료를 저장할 수 있습니다.  
+   
+   
+   차이점 Table  
+   
+   | |ArrayList|LinkedList|
+   |:---:|:---:|:---:|
+   |Random Access|O(1)|O(N)|
+   |Insert/Del at begin|O(N)|O(1)|
+   |Insert/Del at Last|O(1)|O(1) ~ O(N)|
+   |Insert/Del in mid|O(N)|searchTime + O(1)|
+   
+  
+   <br><br>
+    
  ### 💡  Hash Table
   #### 1. Hash Table 이란?  
   - Key, Value 쌍으로 데이터를 저장하는 구조로 가장 빠르게 데이터를 탐색할 수 있는 자료구조 중 하나입니다.   
@@ -113,7 +139,7 @@
   - 장점 : 저장, 삭제, 조회 속도가 빠릅니다.  
   - 단점 : 공간 복잡도(메모리 사용)가 큽니다. 순서가 없으므로 순차적 작업이 필요할 때는 효율성이 떨어집니다.  
   
-  <br>  
+  <br>
   
   #### 3. 사용 예  
   - 전화번호부 : 이름 - 번호, 투표 : 사람 - 표(중복 방지), JSON data type  
@@ -121,7 +147,7 @@
   <br>  
   
   #### 4. 시간복잡도   
-  - 조회 : O(1)
+  - 랜덤 액세스 : O(1)
   - 삽입, 삭제 : O(1), Collision 발생 시 : O(N)  
   
 
@@ -132,7 +158,7 @@
   * 해시테이블(Hash Table)? 해시맵(Hash Map)?  
    -> 우리는 자바에서 주로 HashMap을 통해 Key, Value 쌍 데이터를 저장하고 사용합니다.    
    -> HashTable과 HashMap의 차이는 동기화를 지원하는가? 여부에 있습니다.   
-   -> HashTable : 동기화 지원 / HashMap : 동기화 미지원  
+   -> HashTable : 동기화 지원, Key-Value 값 null 불허 / HashMap : 동기화 미지원, Key-Value 값 null 허용    
   <br>    
   put(삽입) 작업에서 HashTable과 HashMap의 차이  
   <br>
@@ -170,11 +196,29 @@
    - 스택 자료구조는 다음과 같습니다.  
    - 자료에 대한 접근이 최상단 top으로 제한적이며 한쪽 방향으로 삽입하고 같은 방향으로 꺼내는 LIFO 구조입니다.   
    - Ex. A > B > C 순으로 스택에 데이터를 담았다면 C > B> A 순으로 스택으로부터 뽑아내게 됩니다.
-   - #### 장점 : 구조가 단순하여 top에 대한 쓰기/읽기 속도가 빠릅니다.
-   - #### 단점 : 데이터의 최대 개수를 미리 정해야하며 데이터 삽입 삭제가 빠르지만 스택의 top의 데이터만 쓰기/읽기가 가능하므로 작업이 매우 비효율적입니다.
+
+  <br>
+
+   #### 2. 장단점   
+   - 장점 : 구조가 단순하여 top에 대한 쓰기/읽기 속도가 빠릅니다.
+   - 단점 : 데이터의 최대 개수를 미리 정해야하며 데이터 삽입 삭제가 빠르지만 스택의 top의 데이터만 쓰기/읽기가 가능하므로 작업이 매우 비효율적입니다.
   
    <br>
    
+   
+   #### 3. 사용 예  
+   - 웹 브라우저 방문 기록, 역순 문자열 만들기, 실행 취소  
+
+
+   <br>
+   
+   #### 4. 시간 복잡도   
+   - top 위치 조회, 삽입, 삭제 : O(1)  
+   - 일반 조회, 삽입, 삭제 : O(N)
+     
+   <br>
+   
+   #### 5. 사용법 & ETC   
    - 스택을 사용하는 방법 in Java  
    ```
    Stack<Integer> stack = new Stack<>();
@@ -182,18 +226,96 @@
    stack.peek();     // 스택의 top 위치의 데이터를 읽는다.
    stack.pop();      // 스택의 top 위치 데이터를 뽑아낸다.
    stack.isEmpty();  // 스택이 비어있는지 체크한다. -> 비어있다면 true return
-   ```
+   ```  
    
+   Stack 2개로 Queue 만들기  
+   
+   ```
+   import java.util.Stack;
+
+   // Stack 2개로 Queue 구현
+   public class Stack_Practice {
+    static int[] src = {0, 1, 2, 3, 4, 5};
+    static Stack<Integer> stack1 = new Stack<>();
+    static Stack<Integer> stack2 = new Stack<>();
+
+    public static void main(String[] args) {
+
+     stack1.add(1);
+     stack1.add(2);
+     stack1.add(3);
+     stack1.add(4);
+     stack1.add(5);
+
+     while(!stack1.isEmpty()) System.out.println(poll());
+    }
+
+    static public void moveAll() {
+     while(!stack1.isEmpty()) {
+      stack2.add(stack1.pop());
+     }
+    }
+
+    static public void moveAllBack() {
+     while(!stack2.isEmpty()) {
+      stack1.add(stack2.pop());
+     }
+    }
+
+    static public void add(int data) {
+     stack1.add(data);
+    }
+
+    static public int peek() {
+     if(stack2.isEmpty()) moveAll();
+     int ret = stack2.peek();
+     moveAllBack();
+     return ret;
+    }
+
+    static public int poll() {
+     if(stack2.isEmpty()) moveAll();
+     int ret = stack2.pop();
+     moveAllBack();
+     return ret;
+    }
+   }
+
+   ```  
    <br><br>
    
   ### 💡  Queue
+   #### 1. Queue 란?  
    - 먼저 넣은 데이터가 먼저 나오는 FIFO 구조의 자료구조입니다.  
-   <img src="./images/queue.png" width="40%">  
+   <img src="./images/queue.jpg" width="40%">  
    - 스택과 반대되는 개념입니다.  
    - 먼저 줄을 선 사람이 먼저 나갈 수 있는 상황과 같다고 생각하면 됩니다.  
    - 선형 큐, 환형 큐, Linked 큐 등이 있으며 우리가 주로 사용하는 것은 LinkedList 로 구현된 큐입니다.  
    
-   - 큐을 사용하는 방법 in Java
+   <br>   
+   
+   #### 2. 장단점   
+   - 장점 : Front Data 조회, 삭제 & Back Data 삽입이 빠르다.
+   - 단점 : 중간 위치한 데이터 접근이 어렵고 O(N)의 시간 복잡도가 소요된다.
+
+   <br>
+   
+   #### 3. 사용 예  
+   - 입력순 줄을 세워 데이터를 사용할 때, 서버 접속 대기 큐, BFS 알고리즘 구현 시 Queue 자료구조 활용  
+
+   <br>
+   
+   #### 4. 시간 복잡도  
+   - Front 조회, 삭제 : O(1)  
+   - 중간 데이터 조회, 삭제 : O(N)  
+   - Back 삽입 : O(1)  
+   - 중간 데이터 삽입 : O(N)  
+   
+   <br>
+   
+   #### 5. 사용법 & ETC   
+     
+   - 큐을 사용하는 방법 in Java  
    ```
    Queue<Integer> queue = new LinkedList<>();
    queue.offer(1);  // 큐에 '1'을 담는다
@@ -203,15 +325,12 @@
    
 <br><br>
     
-
-  
   ### 💡  Graph   
-  
+   #### 1. Graph 란?  
    <img src="./images/graph.jpg" width="40%">   
    
    - 그래프는 노드와 해당 노드(Vertex)를 연결하는 간선(Edge)을 하나로 모아놓은 자료구조입니다.    
    - 즉, 연결되어 있는 객체 간 관계를 표현할 수 있는 효율적인 자료구조입니다.    
-   - Ex. 지도, 지하철 노선, 전기회로 등등 -> BFS, DFS, Dijkstra, Kruskal 등 다양한 알고리즘 문제 예시로 활용   
    - 완전그래프 : 모든 노드에 대해 서로 최대로 간선이 연결된 상태를 의미합니다.   
    - 방향 그래프 : 간선에 방향성 O / 무방향 그래프 : 간선에 방향성 X    
    - 네트워크 모델로 사용됩니다.    
@@ -219,9 +338,36 @@
    - 노드간 관계는 평등합니다.   
    <br>
    
-   #### 용어   
+   #### 2. 사용 예  
+   - 지도, 지하철 노선, 전기회로 등등 -> BFS, DFS, Dijkstra, Kruskal 등 다양한 알고리즘 문제 예시로 활용   
+   
    <br>
    
+   #### 3. 그래프의 종류  
+   - 무방향(Undirected) 그래프 vs 방향(directed) 그래프  
+    : 무방향 -> 간선을 통해 양쪽 노드로 이동 할 수 있다.  (A -> B  &  B -> A)  
+    : 방향 -> 간선에 방향성이 존재하여 한 방향으로만 이동 할 수 있다. (A -> B)  
+    
+   - 가중치 그래프  
+    : 간선에 비용이나 가중치가 할당된 그래프 -> Dijkstra, Kruskal 등의 알고리즘을 푸는 문제에서 자주 볼 수 있다.  
+
+   - 연결 그래프 vs 비연결 그래프  
+    : 연결 그래프 -> 무방향 그래프에 있는 모든 정점 쌍에 대해 항상 경로가 존재하는 경우. 즉, 모든 노드에서 모든 노드로 이동 가능한 겨우
+    : 비연결 그래프 -> 무방향 그래프에서 특정 정점 쌍 사이에 경로가 하나라도 없는 경우  
+    <img src="./images/graph_compare.jpg" width="40%">  
+    
+   - 완전 그래프
+    : 모든 정점 사이가 간선으로 연결된 경우입니다. -> 노드개수 N개 일 때 간선의 수 N(N-1)/2  
+    <img src="./images/fully_graph.jpg" width="25%"> 
+   
+   
+   #### 4. 그래프 탐색 방법   
+   - BFS : 너비 우선 탐색 -> 탐색 위치로부터 가장 가까운 지점부터 범위를 넓혀가며 탐색하는 방식 : 탐색 Queue 활용  
+   - DFS : 깊이 우선 탐색 -> 탐색 위치로부터 특정 방향으로 끝까지 깊이를 우선적으로 탐색하는 방식 : 재귀 호출 활용  
+   
+   <br>   
+   
+   #### 5. 용어  
    - 정점 : 위치, 노드   
    - 간선 : 위치간의 관계, 노드를 연결하는 선   
    - 인접 정점 : 간선에 의해 직접적으로 연결된 두 노드   
@@ -229,20 +375,61 @@
    - 진입차수 : 방향 그래프에서 하나의 정점으로 들어오는 간선의 수   
    - 진출차수 : 방향 그래프에서 하나의 정점으로부터 나가는 간선의 수   
    
-   <br>
+   <br>  
    
-   --> 그래프를 사용하기 위한 자료구조 준비 예시
+   #### 6. 사용법 & ETC   
+   --> 그래프를 사용하기 위한 자료구조 준비 & 그래프 구현 인접리스트 vs 인접행렬   
    ```
    int[][] map = new int[][];
    List<int[]> map = new ArrayList<>();
    PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> {return o1[] - o2[]});
-   ```
    
-   <br><br>
+   // 2가지 그래프 구현 : 1) 인접 리스트  2) 인접 행렬
+   
+   ----------------------------------------
+   class Node{
+     int start;
+     int end;
+     int cost;
+     
+     // ArgsAllContructor
+   }
+   
+   List<Node> map[] = new ArrayList[N];
+   for(int i=0; i<N; i++) map[N] = new ArrayList<>();
+   
+   for(int i=0; i<N; i++){
+     for(Node N : nodes[i]){
+       map[i].add(new Node(N.start, N.end, N.cost));
+     }
+   }
+   
+   ----------------------------------------
+   
+   int[][] map = new int[N][N];
+   for(int i=0; i<N; i++) Arrays.fill(map[i], Integer.MAX_VALUE);
+   
+   for(int i=0; i<N; i++){
+     for(int j=0; j<N; j++) {
+       map[i][j] = cost;
+     }
+   }
+   
+   ```
+     
+   #### 인접리스트  
+   - 장점 :  희소 그래프 일 때 -> 간선이 연결된 인접 노드만 탐색하기에 빠른 탐색이 가능하다.  
+   - 단점 : 노드 i, j 사이 간선의 존재 여부는 정점 i 혹은 정점 j 리스트를 모두 조회하여 본 후 알 수 있다.  
+   
+   #### 인접행렬  
+   - 장점 : 노드 사이 간선 존재 여부를 O(1) 시간에 빠르게 확인할 수 있다, 밀집 그래프 일 때 효율적이다.  
+   - 단점 : 희소 그래프인 경우 비효율적이다, 그래프에 존재하는 모든 간선의 수를 알기 위해서는 O(N^2)의 시간이 필요하다. (전체 행렬 조사 필요)   
+   
+   <br><br>  
 
   ### 💡  Tree    
+   #### 1. Tree 란?   
    <img src="./images/tree.jpg" width="40%">   
-   <br>  
    
    - 방향성이 없는 비순환 그래프의 한 종류입니다.   
    - 사이클(순환)이 절대 존재할 수 없습니다. 사이클(순환)이 존재하면 그것은 그래프!    
@@ -265,8 +452,16 @@
    |탐색방식|DFS,BFS, Dijkstra...|DFS, BFS내 Pre, In, Post -order|
    |활용예시|지도, 지하철 노선, 회로, 도로|이진 트리, 이진 힙(최대, 최소)|
 
-<br>
-
+  <br>  
+   
+   ### 💡 Binary Heap   
+   
+   
+   ### 💡 Red-Black Tree  
+   
+   
+   ### 💡 B+ Tree  
+   
 
 -----
 
