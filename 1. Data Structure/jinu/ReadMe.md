@@ -189,12 +189,13 @@
   
   <br>
 
-  #### 6. 해시 충돌 & 해결  
-  <img src="./images/hashcollision.png" width="40%">  
-  - HashTable은 Key - Value 쌍을 가지기 위해 Hash 함수에 Key 값을 넣어 Value 값에 맵핑되도록 합니다.  
+  #### 6. 해시 충돌 & 해결   
+  <img src="./images/hashcollision.png" width="40%">    
+  
+  - HashTable은 Key-Value 쌍을 가지기 위해 Hash 함수에 Key 값을 넣어 Value 값에 맵핑되도록 합니다.   
   - Hash Function은 key 값을 통해 Value가 저장되어 있는 주소(or Index)를 도출하는 함수입니다.  
-   -> 이때 Hash Function의 결과가 항상 유일함을 보장할 수 없기에 해시 충돌이 발생할 수 있게 됩니다.  
-   -> Hash Function으로 mod 11 을 사용하였다고 할 때, 21과 32는 같은 결과 '10'을 도출하여 충돌이 발생하게 됩니다.  
+   -> 이때 Hash Function의 결과가 항상 유일함을 보장할 수 없기에 해시 충돌이 발생할 수 있게 됩니다.   
+   -> Hash Function으로 mod 11 을 사용하였다고 할 때, 21과 32는 같은 결과 '10'을 도출하여 충돌이 발생하게 됩니다.   
   
   - 이를 해결하기 위한 몇가지 해시 충돌 해결 방법이 있습니다.  
 
