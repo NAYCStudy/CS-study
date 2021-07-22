@@ -84,7 +84,7 @@
 
    #### 5. 사용법 & ETC  
 
-👉 [LinkedList 구현 Source](./LinkedList/Readme.md)
+   [Single_LinkedList 구현 Source](./LinkedList/Readme.md)
 
 
    - 자바에서 리스트 선언/초기화하는 방법
