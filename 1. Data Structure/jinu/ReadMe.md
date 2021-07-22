@@ -540,7 +540,7 @@
    
    
    #### B-Tree 만들어보며 학습할 수 있는 Site  
-   <a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html" value="B tree 학습 사이트">
+   <a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html" value="B tree 학습 사이트" height="15">
    
 -----
 
