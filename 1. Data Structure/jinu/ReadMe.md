@@ -534,13 +534,13 @@
    - 정렬 순서를 보장하고 인덱싱을 통한 빠른 탐색이 가능한 DB 에서 사용하는 자료구조 중 하나의 종류입니다.  
    - 최대 M개의 자식을 가질 수 있는 B 트리를 M차 B트리 라고 합니다.  
    _3차 B트리_  
-   <img src="./images/redblack2.png" width="40%">   
+   <img src="./images/btree1.png" width="40%">   
    
    - 
    
    
    #### B-Tree 만들어보며 학습할 수 있는 Site  
-    : https://www.cs.usfca.edu/~galles/visualization/BTree.html  
+   <a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">
    
 -----
 
