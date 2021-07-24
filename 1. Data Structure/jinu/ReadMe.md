@@ -523,8 +523,35 @@
    5) 어떤 노드로부터 시작되어 그에 속한 하위 리프 노드에 도달하는 모든 경로에는 리프 노드를 제외하면 모두 같은 개수의 블랙 노드가 있다.  
    <img src="./images/redblack2.png" width="40%">    
    
+   <br>  
    
-   <br><br>
+   #### Red Black Tree 원소 삽입에서 나타나는 문제점의 해결방법  
+   
+   - Insert 8  
+   <img src="./images/redblack3.png" width="20%">    
+   
+   - Insert 18  
+   <img src="./images/redblack4.png" width="20%">   
+   
+   - Insert 5   
+   <img src="./images/redblack5.png" width="20%">   
+   
+   - Insert 15 : Recoloring 진행 필요(Red 노드가 연속으로 나올 수 없다 조건 위배)   
+   <img src="./images/redblack6.png" width="20%">     
+   
+   <br>
+   
+   ##### 2가지 해결 방법   
+   1) Recoloring : 삽입된 노드 부모의 형제 색상이 Red인 경우 -> 위의 경우 '15'의 부모 '18'의 형제 '5'의 색상이 Red!   
+   2) Restructuring : 삽입된 노드 부모의 형제 색상이 Black인 경우 or 형제 노드가 없는 경우   
+
+   
+   
+
+   
+   
+   
+   <br><br>  
    
    
   ### 💡 B+ Tree  
@@ -540,7 +567,7 @@
    
    
    #### B-Tree 만들어보며 학습할 수 있는 Site  
-   <a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html" value="B tree 학습 사이트" height="5%">
+   <a href="https://www.cs.usfca.edu/~galles/visualization/BTree.html" value="B tree 학습 사이트" width="60%" height="5%">
    
 -----
 
