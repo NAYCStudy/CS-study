@@ -21,23 +21,17 @@
  - 7.17 다음 스터디는 7.25(일) 11:30 예정!
  - 7.25 까지 아래 내용 학습!
  - 7.25 까지 각자 '질문모음집'에 문제 해결해보기! + 질문사항 자유롭게 ReadMe.md 에 추가!
- ### Data Structure
- * Array
- * LinkedList
- * HashTable
- * Stack
- * Queue
- * Graph
- * Tree
- * 그래프(Graph)와 트리(Tree)의 차이점  
- 
- -- Array ~ Graph & Tree Diff 까지 추가 정리할 사람들은 서로 정리한거 자유롭게 공유하면서 정리++ 하기!  
- 
+ ### Data Structure\
+ ----------- 부족했던 부분 추가 정리 & 보완하기!   
  * Binary Heap
  * Red-Black Tree
  * B+ Tree   
+ <br>  
  
-  -- Tree 깊이있게 공부해보기!
+ ----------- 네트워크 일부 정리하기!   
+ * OSI 7계층  
+ * TCP 헤더 분석까지 정리!     
+ * TCP 통신 연결 Handshake는 다음 주 범위!   
  
  <br>
  
