@@ -198,7 +198,7 @@
 <br>  
 
  #### TCP Header   
-  <img src="./images/tcpheader.jpg" width="30%">   
+  <img src="./images/tcpheader.jpg" width="80%">   
   
   - Source Port Address : Well-Known port(0 to 1023), Registered port(1024 to 49151), Dynamic port(49152 to 65535)    
   
