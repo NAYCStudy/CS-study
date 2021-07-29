@@ -198,9 +198,9 @@
 <br>  
 
  #### TCP Header   
-  <img src="./images/l5.jpg" width="30%">   
+  <img src="./images/tcpheader.jpg" width="30%">   
   
-  - Source Port Address : Well-Known port(0~1023), Registered port(1024~49151), Dynamic port(49152~65535)    
+  - Source Port Address : Well-Known port(0 to 1023), Registered port(1024 to 49151), Dynamic port(49152 to 65535)    
   
   - Destination Port Address : 목적지 어플리케이션이 사용하는 포트 번호   
 
@@ -216,7 +216,6 @@
   |443|HTTPS(Secure)|
   |8080|Alternative HTTP|
   
-  <br>
   
   - Sequence number : 전송 데이터의 모든 바이트에는 고유 일련 번호가 부여되어 세그먼트 순서가 어긋나거나 분실되어도 이를 재배열 조합할 수 있습니다.   
   - Acknowledgment number : 다음 세그먼트(전송 계층 단위)를 수신할 준비가 되었다는 신호입니다.  
