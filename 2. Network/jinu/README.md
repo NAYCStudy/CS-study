@@ -192,8 +192,12 @@
 
  #### TCP Header   
   <img src="/images/l5.jpg" width="30%">   
-  - Source Port Address : Well-Known port(0~1023), Registered port(1024~49151), Dynamic port(49152~65535)  
-  - Destination Port Address : 목적지 어플리케이션이 사용하는 포트 번호  
+  
+  - Source Port Address : Well-Known port(0~1023), Registered port(1024~49151), Dynamic port(49152~65535)    
+  
+  - Destination Port Address : 목적지 어플리케이션이 사용하는 포트 번호   
+
+  
   |Port|Service|
   |:-:|:-|
   |21|FTP(파일)|
@@ -205,4 +209,23 @@
   |443|HTTPS(Secure)|
   |8080|Alternative HTTP|
   
+  <br>
   
+  - Sequence number : 전송 데이터의 모든 바이트에는 고유 일련 번호가 부여되어 세그먼트 순서가 어긋나거나 분실되어도 이를 재배열 조합할 수 있습니다.   
+  - Acknowledgment number : 다음 세그먼트(전송 계층 단위)를 수신할 준비가 되었다는 신호입니다.  
+  - Control flags : 8개의 서로 다른 제어 비트   
+     ###### CWR : Congestion Window Reduced) – 혼잡 윈도우 크기 감소  
+     ######  ECN : Explicit Congestion Notification) – 혼잡을 알림   
+     ######  URG(Urgent) : Urgent Pointer 필드가 가리키는 세그먼트 번호까지 긴급 데이터를 포함되어 있다는 것을 뜻한다  
+      ######  이 플래그가 설정되지 않았다면 Uregent Pointer 필드는 무시되어야 한다.  
+     ######  ACK(Acknowledgment) : 확인 응답 메시지  
+     ######  PSH(Push) : 데이터를 포함한다는 것을 뜻한다.  
+     ######  RST(Reset) : 수신 거부를 하고자 할때 사용  
+     ######  SYN(Synchronize) : 가상 회선이 처음 개설될 때 두 시스템의 TCP 소프트웨어는 의미 있는 확인 메시지를 전송하기 위해 일련 번호를서로 동기화해야 한다.  
+     ######  FIN(Finish) : 작업이 끝나고 가상 회선을 종결하고자 할 때 사용  
+
+  - checksum : TCP 세그먼트의 내용이 유효한 내용인지 검증 & 손상 여부를 검사할 수 있는 CheckSum 값  
+  
+  
+ * Sliding Window? 
+ 
