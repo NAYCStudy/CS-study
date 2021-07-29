@@ -90,7 +90,7 @@
  <br>
  
  ##### 세션 계층(L5)  
-  <img src="/images/l5.jpg" width="30%">   
+  <img src="./images/l5.jpg" width="30%">   
   - 프로토콜 : SSH, TLS, NetBIOS  
   - 역할 : Port 번호를 기반으로 연결하며 통신 장치간 상호작용에 대해 설정하고 동기화합니다, TCP/IP 세션을 생성/파기하는 역할을 합니다.(OS에서 수행)  
   - 세션이란 __데이터가 통신하기 위한 논리적인 연결을 뜻합니다.__   
@@ -192,7 +192,7 @@
 <br>  
 
  #### TCP Header   
-  <img src="/images/l5.jpg" width="30%">   
+  <img src="./images/l5.jpg" width="30%">   
   
   - Source Port Address : Well-Known port(0~1023), Registered port(1024~49151), Dynamic port(49152~65535)    
   
