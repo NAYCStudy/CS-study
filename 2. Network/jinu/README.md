@@ -232,6 +232,16 @@
 
   - checksum : TCP 세그먼트의 내용이 유효한 내용인지 검증 & 손상 여부를 검사할 수 있는 CheckSum 값  
   
+
+ #### UDP Header  
+  <img src="./images/udpheader.png" width="80%">   
   
- * Sliding Window? 
+  - Source Port : 송신자의 포트번호  Well-Known port(0 to 1023), Registered port(1024 to 49151), Dynamic port(49152 to 65535)    
+  - Destination Port : 수신자의 포트번호  Well-Known port(0 to 1023), Registered port(1024 to 49151), Dynamic port(49152 to 65535)    
+  - UDP Length : UDP 헤더와 데이터를 합친 길이 정보  
+  - UDP CheckSum : UDP 헤더와 데이터를 모두 포함하여 체크하기 위한 최소한의 CheckSum   
+
+ 
+ 
+  
  
