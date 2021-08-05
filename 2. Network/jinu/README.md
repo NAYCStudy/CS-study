@@ -324,17 +324,17 @@
   - 일반헤더, 요청/응답 헤더, 엔티티 헤더  
   
   
-  1. 일반헤더 : HTTP Body와는 관련 없고 생성된 날짜 및 시간, 연결과 같은 통신에 대한 일반 정보가 포함됩니다. 요청/응답에 공통으로 사용됩니다.    
-   -  Date, Connection, Content-Length, Cache-Control, Content-Type    
+ 1. 일반헤더 : HTTP Body와는 관련 없고 생성된 날짜 및 시간, 연결과 같은 통신에 대한 일반 정보가 포함됩니다. 요청/응답에 공통으로 사용됩니다.    
+ &nbsp; -  Date, Connection, Content-Length, Cache-Control, Content-Type    
 
 
-  2. 요청(Request)/응답(Response) 헤더 : 요청과 응답에 대한 정보가 들어있는 헤더이며 URL, Method, 브라우저 정보 등이 포함됩니다.     
-   - Request. Host, User-Agent, Accept, Cookie, Origin, Authorization    
-   - Response. Server, Access-Control-Allow-Origin, Allow, Location, Content-Security-Policy, Access-Control-Expose-Header   
+ 2. 요청(Request)/응답(Response) 헤더 : 요청과 응답에 대한 정보가 들어있는 헤더이며 URL, Method, 브라우저 정보 등이 포함됩니다.     
+ &nbsp;  - Request. Host, User-Agent, Accept, Cookie, Origin, Authorization    
+ &nbsp;  - Response. Server, Access-Control-Allow-Origin, Allow, Location, Content-Security-Policy, Access-Control-Expose-Header   
   
   
-  3. 엔티티 헤더 : 메시지, Body 본문에 대한 정보가 포함됩니다. 컨텐츠의 길이, 언어, 인코딩, 만료날짜 등의 정보가 포함되어 있습니다.    
-   - Content-Length, Content-Language, Content-Encoding   
+ 3. 엔티티 헤더 : 메시지, Body 본문에 대한 정보가 포함됩니다. 컨텐츠의 길이, 언어, 인코딩, 만료날짜 등의 정보가 포함되어 있습니다.    
+ &nbsp;  - Content-Length, Content-Language, Content-Encoding   
 
 
  <br>  
