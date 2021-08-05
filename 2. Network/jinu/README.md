@@ -278,6 +278,8 @@
   : Client에서 세션을 종료시킨 후 뒤늦게 도착하는 패킷이 있을 수 있으니 일정시간동안 세션을 유지하고 잉여패킷을 기다리는 과정을 거칩니다. 이를 Time_Wait 라고 합니다.   
   
  <br><br> 
+ -----
+ 
  
  ### HTTP vs HTTPS(Http + SSL)    
   #### HTTP? 서버/클라이언트 모델을 따라 데이터를 주고 받기 위한 프로토콜 입니다.   
@@ -336,7 +338,6 @@
  3. 엔티티 헤더 : 메시지, Body 본문에 대한 정보가 포함됩니다. 컨텐츠의 길이, 언어, 인코딩, 만료날짜 등의 정보가 포함되어 있습니다.    
  &nbsp;  - Content-Length, Content-Language, Content-Encoding   
 
-
  <br>  
  
  * Request Method  
@@ -347,7 +348,9 @@
    PATCH(단 1개의 정보만 수정)    
    DELETE(URI 요청, 삭제), OPTIONS       
   
-
+ <br>
+ -----
+ <br>
 
  ### CORS   
   #### Cross Origin Resource Sharing : 교차 출처 리소스 공유   
