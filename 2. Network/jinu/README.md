@@ -243,5 +243,37 @@
 
  
  
+ -----
   
  
+ <br><br><br>
+ 
+ ### TCP의 3-way-handshake와 4-way-handshake   
+ 
+ <br>
+ 
+ - 신뢰성 있는 연결을 통해 안전한 통신 방식   
+ - 3 way handshake : 연결을 맺을때!   
+ - 4 way handshake : 연결을 끊을때!   
+
+ <br>
+
+ - 3 way handshake : TCP/IP 프로토콜을 통해 응용프로그램이 데이터를 전송하기 전 __정확한 연결 및 전송을 보장하기 위헤 상대방과 사전에 세션을 수립하는 과정__ 을 의미합니다.   
+ 1. Client -> Server : TCP SYNC  : 서버에 접속을 요청하는 SYN 패킷을 전송하고 클라이언트는 SYN/ACK 응답을 기다립니다.  
+ 2. Server -> Client : TCP SYNC ACK  : 서버는 SYN 요청을 받고 클라이언트에게 알겠다는 ACK 와 SYN flag 가 설정된 패킷을 발송한 후 클라이언트의 ACK 응답을 기다립니다.   
+ 3. Client -> Server : TCP ACK  : 클라이언트는 서버로부터 ACK 와 SYN 신호르 받아 ACK 를 보내고 연결이 성사됩니다.   
+ <img src="./images/3way.png" width="40%">   
+ 
+ <br>
+ 
+ - 4 way handshake : TCP/IP 프로토콜의 __연결된 세션을 종료하기 위해__ 수행되는 절차입니다.    
+ 1. Client -> Server : 클라이언트가 서버에 연결을 종료하겠다는 FIN flag를 전송한다.    
+ 2. Server -> Client : 서버는 ACK 메시지를 보내고 자신의 통신이 끝날때까지 기다리는 상태가 됩니다.   
+ 3. Server -> Client : 서버가 통신이 끝났으면 연결이 종료되었다고 클라이언트에게 FIN 플래그를 전송한다.   
+ 4. Client -> Server : 클라이언트는 서버에 ACK 신호를 보낸다.   
+ <img src="./images/4way.png" width="40%">    
+ 
+ 
+ - 만약, 서버에서 FIN을 전송하기 전에 전송한 패킷이 Routing 지연이나 패킷 유실로 인한 재전송으로 인해 FIN 패킷보다 늦게 도착하는 상황이 발생한다면??   
+  : 
+  
