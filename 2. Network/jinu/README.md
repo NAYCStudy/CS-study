@@ -345,8 +345,9 @@
    POST(Body에 데이터 전송)    
    HEAD(Header 정보만 요청)   
    PUT(Body에 데이터 전송)   
-   PATCH(단 1개의 정보만 수정)    
-   DELETE(URI 요청, 삭제), OPTIONS       
+   PATCH(단 1개의 정보만 수정, Body에 데이터 전송)    
+   DELETE(URI 요청, 삭제)   
+   OPTIONS        
   
  <br>
  -----
@@ -355,9 +356,86 @@
  ### CORS   
   #### Cross Origin Resource Sharing : 교차 출처 리소스 공유   
   - 다른 출처의 자원에 접근할 수 있는 권한을 부여하도록 브라우저에게 알려주는 체제이며 보안상의 이유로 기본적으로 브라우저는 교차 출처의 요청을 제한합니다.   
+
+  ![image](https://user-images.githubusercontent.com/58026613/128531179-2013e528-5f0a-488c-b7b3-5eb510fb02da.png)
+
   - CORS 허용의 경우  
   &nbsp; 1. XMLHttpRequest  
   &nbsp; 2. WebGl 텍스쳐   
   &nbsp; 3. drawImage()를 사용한 이미지/비디오 프레임  
   &nbsp; 4. 이미지로부터 호출되는 CSS   
 
+  <br>
+  
+  #### REST API 에서 리소스에 대한 CORS 활성화 필요 여부   
+  - REST API 요청 시 비단순 cross-origin 요청을 받을 때 CORS 지원을 활성화해야 합니다. (단순 요청은 상관 없음)    
+  
+  __단순 요청?__    
+  - 다음 모든 조건을 충족하면 단순 요청! 이외는 모두 비단순 요청!   
+  &nbsp; 1. GET, HEAD, POST 방식으로 발행된 요청   
+  &nbsp; 2. POST 요청의 경우 Origin 헤더를 포함   
+  &nbsp; 3. Payload Contents-Type 이 text/plain, multipart/form-data 또는 application/x-www-form-urlencoded 입니다.   
+  &nbsp; 4. 요청 내에 사용자 임의 지정(추가) 헤더가 없습니다.    
+  &nbsp; 5. 단순 POST 요청에서 리소스의 응답에 Access-Control-Allow-Origin 헤더가 포함되어야 합니다. 헤더 키 값은 '*' 혹은 허용 오리진으로 설정    
+  
+  &nbsp; -> 위 조건을 만족하지 않는 모든 요청은 비단순 요청으로 CORS 지원을 활성화해야 통신이 가능합니다.   
+  
+  <br>
+  
+  
+__CORS 지원 활성화__    
+- 브라우저에서 비단순 HTTP 요청을 받을 경우 CORS 프로토콜은 __preflight 요청__ 을 먼저 서버로 보내고 서버의 승인을 기다린 후 허가가 나면 실제 요청을 보내 처리하도록 합니다.    
+- preflight 요청   
+&nbsp; - Origin 헤더를 포함합니다.  
+&nbsp; - OPTIONS Method를 이용합니다.   
+&nbsp; - Access-Control-Request-Method, Access-Conrol-Request-Headers 헤더를 포함합니다.   
+
+<br>
+ 
+CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합니다.   
+
+#### Spring Boot 에서의 CORS 허용   
+- springframework.web.cors 라이브러리 & Spring Security import
+- @Bean 주입    
+```
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .anyRequest().permitAll()
+            .and()
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
+                .csrf().disable()
+    }
+    
+    
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOriginPattern("*");   // Origin 패턴(사이트 도메인) 모두 허용   
+        configuration.addAllowedHeader("*");          // 특정 Header에 대해 허용 
+        configuration.addAllowedMethod("*");          // 특정 Method(GET, POST, PUT, ..)에 대해 허용
+        configuration.setAllowCredentials(true);      // 자격증명과 함께 요청 여부, Authorization으로 사용자 인증 사용 시 true
+        configuration.addExposedHeader(accessToken);   // REST API 에서 클라이언트에게 지정 Header 정보를 추가 전달할 때 설정 사용
+        configuration.addExposedHeader(refreshToken);
+        configuration.setMaxAge(3600L);               // 클라이언트의 preflight 요청으로부터 받은 서버로의 응답 Cache 유지 시간(Sec) -> 클라이언트의 캐시
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+```
+
+  - CORS를 통해 외부로부터의 요청에 대한 보안을 강화할 수 있습니다.    
+  
+  <br>
+  
+  -----
+  
+  
+  
