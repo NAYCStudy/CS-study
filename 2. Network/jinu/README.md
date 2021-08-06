@@ -293,7 +293,7 @@
   - HTTP는 어플리케이션 레벨의 프로토콜로 TCP/IP 위에서 작동합니다. HTTP는 상태를 가지고 있지 않는 Stateless(상태정보X) 프로토콜이며 Method, Path, Version, Header, Body로 구성됩니다. 
   - 하지만, HTTP는 평문데이터를 전송하는 프로토콜이기에 HTTP로 기밀 정보를 주고 받기에는 보안상 문제가 발생합니다.   
   - HTTPS는 HTTP에서 데이터 암호화가 추가된 프로토콜이며 __공개키 암호화__ 를 사용합니다.(실제 데이터 암호화느 대칭키, 키 교환에는 공개키 암호화를 사용 <- 속도개선)    
-  - 공개키[비대칭키](RSA) 암호화 : 비밀키 & 공개키  
+  - 공개키(비대칭키) (RSA) 암호화 : 비밀키 & 공개키  
    &nbsp; -> 공개키 : 모두에게 공개가능한 키   
    &nbsp; -> 개인키 : 나만 가지고 비밀로 해야하는 키    
   - 공개키 암호화 : __공개키__ 로 암호화하면 __개인키__ 로만 복호화할 수 있습니다. (누군가 개인키를 가진사람에게 비밀로 정보를 전송하는 용도)   
@@ -374,7 +374,7 @@
   - 다음 모든 조건을 충족하면 단순 요청! 이외는 모두 비단순 요청!   
   &nbsp; 1. GET, HEAD, POST 방식으로 발행된 요청   
   &nbsp; 2. POST 요청의 경우 Origin 헤더를 포함   
-  &nbsp; 3. Payload Contents-Type 이 text/plain, multipart/form-data 또는 application/x-www-form-urlencoded 입니다.   
+  &nbsp; 3. Payload Contents-Type 이 text/plain,   multipart/form-data 또는 application/x-www-form-urlencoded 입니다.   
   &nbsp; 4. 요청 내에 사용자 임의 지정(추가) 헤더가 없습니다.    
   &nbsp; 5. 단순 POST 요청에서 리소스의 응답에 Access-Control-Allow-Origin 헤더가 포함되어야 합니다. 헤더 키 값은 '*' 혹은 허용 오리진으로 설정    
   
