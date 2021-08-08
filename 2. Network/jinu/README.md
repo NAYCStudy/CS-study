@@ -439,4 +439,7 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
   -----
   
   
+  <br>
+ 
+  ### GET Method vs POST Method  
   
