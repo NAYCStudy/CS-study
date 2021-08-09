@@ -462,7 +462,7 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
    - Query String VS Path Variable   
    &nbsp; - Query String : url 뒤에 ? 구분자 이후 Key=Value 쌍으로 전송하는 데이터를 Query String 이라고 합니다.    
    &nbsp; - Path Variable : url/{data}/url/{data} 와 같이 url 어디든지 데이터가 바인딩되어 들어갈 수 있는 형태를 Path Variable 이라고 합니다. REST API 표현 형태로 적절합니다.    
-   &nbsp; - 사용예
+   &nbsp; - 사용예   
    &nbsp;&nbsp; - Query String => /users?occupation=programer : 직업군이 프로그래머인 사람 목록을 가져온다.    
    &nbsp;&nbsp; - Path Variable => /users/123 : 유저 ID가 123인 사람의 정보를 가져온다.   
    
@@ -475,14 +475,16 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
    - 데이터가 url에 담기지 않고 Body에 담기지 않으므로 데이터 노출 가능성이 상대적으로 적습니다. 하지만 기밀 데이터에 대해서는 반드시 암호화가 필요합니다.  
    - GET 방식보다 상대적으로 느립니다. 이유는 GET 방식의 요청은 캐싱(최초 접근 후 요청 데이터를 저장시켜둔다.)을 사용하기 때문입니다.
    
+   <br>
    
-   <img src="./images/getpost.png" width="40%">    
-   
+   <img src="./images/getpost.png" width="40%" float="center">    
    
    <br>
    
    
   ### 쿠키과 세션  
+  <br>
+  
    #### Cookie : 웹 쿠키, 브라우저 쿠키 등으로 불리며 서버 -> 클라이언트에게 전송하는 작은 데이터 조각을 의미합니다.   
    
    - 쿠키가 존재하는 이유 : Http 프로토콜은 Stateless한 특징을 가지며 상태 정보가 없기에 서버와 클라이언트 간 상태정보를 대신할 정보를 저장하기 위해 쿠키가 탄생했습니다.   
