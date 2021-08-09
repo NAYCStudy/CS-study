@@ -441,5 +441,70 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
   
   <br>
  
-  ### GET Method vs POST Method  
+  ### GET Method vs POST Method   
+   #### GET 방식과 POST 방식 통신   
+   
+   - HTTP 프로토콜이 제공하는 GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD, TRACE 8가지 메소드 중 GET, POST에 대해 깊게 알아보자!  
+   <img src="./images/httpProtocol.png" width="40%">    
+   
+   <br> 
   
+   
+   #### GET  
+   - 데이터를 URL 뒤 Query String으로 붙여서 전송합니다.   
+   - 데이터는 key=value 쌍으로 담아서 전송합니다.   
+   - url/url/url?key=value 와 같이 url과 query string 데이터 부분을 '?' 구분자로 구분합니다.   
+   - 여러개의 데이터를 담을 땐 url/url/url?key1=value1&key2=value2 와 같이 '&' 구분자로 데이터를 분리합니다.   
+   - GET 방식은 BODY에 데이터를 담지 않으므로 Body의 Content-Type에 대한 정보를 알려주는 Content-Type 헤더 필드는 포함되지 않습니다.   
+   - url에 데이터가 포함되어 전송되므로 데이터가 노출되기 쉽습니다.   
+   - 최대 2KB 데이터를 포함할 수 있습니다. (전송 데이터 양에 제한)   
+
+   - Query String VS Path Variable   
+   &nbsp; - Query String : url 뒤에 ? 구분자 이후 Key=Value 쌍으로 전송하는 데이터를 Query String 이라고 합니다.    
+   &nbsp; - Path Variable : url/{data}/url/{data} 와 같이 url 어디든지 데이터가 바인딩되어 들어갈 수 있는 형태를 Path Variable 이라고 합니다. REST API 표현 형태로 적절합니다.    
+   &nbsp; - 사용예
+   &nbsp;&nbsp; - Query String => /users?occupation=programer : 직업군이 프로그래머인 사람 목록을 가져온다.    
+   &nbsp;&nbsp; - Path Variable => /users/123 : 유저 ID가 123인 사람의 정보를 가져온다.   
+   
+   <br>
+    
+   #### POST   
+   - 데이터를 Body에 담아서 전송합니다.  
+   - 데이터는 다양한 형태가 될 수 있으며 이는 요청헤더의 Content-Type 필드에서 명시합니다.    
+   - Content-Type : text/plain, multipart/form-data, application/x-www-form-urlencoded(Default), application/json  등등    
+   - 데이터가 url에 담기지 않고 Body에 담기지 않으므로 데이터 노출 가능성이 상대적으로 적습니다. 하지만 기밀 데이터에 대해서는 반드시 암호화가 필요합니다.  
+   - GET 방식보다 상대적으로 느립니다. 이유는 GET 방식의 요청은 캐싱(최초 접근 후 요청 데이터를 저장시켜둔다.)을 사용하기 때문입니다.
+   
+   
+   <img src="./images/getpost.png" width="40%">    
+   
+   
+   <br>
+   
+   
+  ### 쿠키과 세션  
+   #### Cookie : 웹 쿠키, 브라우저 쿠키 등으로 불리며 서버 -> 클라이언트에게 전송하는 작은 데이터 조각을 의미합니다.   
+   
+   - 쿠키가 존재하는 이유 : Http 프로토콜은 Stateless한 특징을 가지며 상태 정보가 없기에 서버와 클라이언트 간 상태정보를 대신할 정보를 저장하기 위해 쿠키가 탄생했습니다.   
+   - 쿠키는 소규모 서버의 세션관리, 개인 설정 유지(장바구니), 사용자 행동 트래킹(분석) 등의 용도로 사용됩니다.    
+   - 쿠키 하나에 4KB 용량의 데이터를 저장할 수 있고 텍스트 데이터를 저장할 수 있습니다. BLOB 과 같은 Binary type의 데이터를 저장할 수는 없습니다.   
+   - 쿠키는 클라이언트에 저장됩니다.   
+   - 쿠키는 만료 날짜를 지정할 수 있으며 Default는 브라우저 종료 시 삭제됩니다. 만료 날짜를 지정할 경우 해당 날짜까지 쿠키가 Client Local에 남아있게 됩니다.   
+   - 쿠키에는 경로정보가 포함되는데 웹 브라우저에 해당 서버의 쿠키가 남아있다면 Http 요청 시 헤더의 Cookie에 무조건 담아서 보냅니다.   
+  
+  
+  #### Session : 통신을 위해 연결된 상태를 의미하며 연결 순간부터 끝맺음 순간까지의 기간을 뜻합니다.    
+    
+   - 세션은 보통 서버에 연결정보(세션, 클라이언트 상태정보)를 저장해두고 세션쿠키(세션ID)를 클라이언트에게 보내어 서버가 클라이언트를 식별할 수 있도록하는 방식을 의미하는 경우가 많습니다.  
+   - 세션은 서버의 능력에 따라 용량이 상이합니다.   
+   - 서버에서 세션 객체를 생성하여 클라이언트 고유의 세션 ID 값을 부여하여 식별합니다.    
+   - 클라이언트와 서버의 상태정보 세션은 서버에 저장되며 클라이언트에게는 세션 ID 값(이하 '세션쿠키')을 전송합니다.    
+   - 웹 브라우저 종료 시 세션쿠키는 삭제됩니다.    
+   - 클라이언트는 서버로부터 세션 ID를 받아 쿠키에 저장합니다. -> 쿠키는 경로정보가 포함되어 해당 서버로 요청 시 헤더에 Cookie(세션 ID)를 담아서 보내게 됩니다.(Client 식별)     
+   - 세션은 쿠키를 이용한 클라이언트 식별 방식이라고 생각할 수 있습니다.   
+
+  <br>
+ 
+ 
+   
+   
