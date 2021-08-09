@@ -508,5 +508,9 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
   <br>
  
  
-   
-   
+  ### DNS : Domain Name System  
+  
+ 
+  ### REST API와 RESTful 개념
+  
+  
