@@ -547,6 +547,29 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
   - 메소드 : 가입(생성)한다.  
   - 메시지 : 이름이 jinwoo인 사용자   
  
-   - 메소드 : POST, GET, PUT, DELETE, PATCH 등과 같은 Http Method 로 표현합니다.   
-   - 
-  
+  &nbsp; - 메소드 : POST, GET, PUT, DELETE, PATCH 등과 같은 Http Method 로 표현합니다.   
+  &nbsp; - 리소스 : http://example/users 와 같이 URI로 표현이 됩니다.   
+  &nbsp; - 메시지 : 디테일한 내용은 Body 혹은 Parameter를 통해 표현합니다.   
+ 
+ 리소스 기반의 명사 형태로 URI를 정의하고 안전한 메소드 활용를 통해 요청을 표현하는 것이 REST 형태의 디자인입니다.     
+ Ex)   
+ 조회 : GET, example/users/{id} or example/users?id=~~   
+ 수정 : PUT, example/users, body{id=~~, name = "jinu"}    
+ 삭제 : DELETE, example/users/{id}    
+ 
+ <br>
+ 
+ ###### 멱등성 : 같은 연산을 여러번 적용하더라도 결과에는 변함이 없는 것   
+      ######  -> Ex. POST 여러번 => 여러개 생성 / PUT 여러번 => 한번 바뀐 후 같은 요청 시 상태변화 X   
+ 
+ |메소드|의미|멱등성|
+ |:-:|:-:|:-:|
+ |POST|Create|X|
+ |GET|Read|O|
+ |PUT|Update|O|
+ |DELETE|Delete|O|
+
+ <br>
+ 
+ 
+ 
