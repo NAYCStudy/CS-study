@@ -629,7 +629,7 @@ function handler (req, res) {
   });
 }
 
-io.on('connection', function (socket) {
+io.on('connection', function (socket) {      // 연결되었을 때의 이벤트 정의   
   socket.emit('news', { hello: 'world' });
   socket.on('my other event', function (data) {
     console.log(data);
@@ -645,7 +645,7 @@ io.on('connection', function (socket) {
  <br>
  
  * Java Socket I/O (Server Thread)
-```
+ ```
  public class SocketThreadServer extends Thread {
 	
 	private static final Logger logger = Logger.getLogger(SocketThreadServer.class);
@@ -693,18 +693,40 @@ io.on('connection', function (socket) {
 	}
 }
  
-```  
+ ```  
+	
  <br><br>
  
 ### Socket.io VS webSocket   
+ #### Socket.io & WebSocket : 웹 서버와 클라이언트 간 양방향 통신을 가능하게 해주는 모듈   
+ #### Socket.io : 브라우저에 상관없이 서버 - 클라이언트 간 메시지를 양방향으로 주고 받을 수 있습니다, node.js 기반 기술    
+ #### WebSocket : 표준 WebSocket API는 W3C에서 관리, 지원되는 브라우저에서만 서버 - 클라이언트 간 소켓 통신 가능, HTML5 표준 기술    
+	
+<br>
+	
+ 1. WebSocket   
+  - 브라우저는 "Upgrade : websocket" 헤더와 함께 랜덤하게 생성한 key 값을 서버에 보냅니다.   
+  - 웹 서버는 해당 키를 바탕으로 토큰을 생성하여 브라우저에 응답합니다.    
+  - 이를 통해, WebSocket Hand-Shaking이 이루어지며 연결이 이루어집니다.   
  
+ 2. Socket.io
+  - 모든 웹 브라우저가 지원하며 자바스크립트로 구현되어 있습니다.   
+  - Socket.io는 브라우저와 웹 서버 종류와 버전에 따라 적합한 기술을 선택하여 사용합니다.   
+  - 만약, 브라우저에 FlashSocket 기술을 지원하는 플러그인이 설치되어 있으면 그것을 사용하고 없다면 Ajax Long Polling 방식 등을 이용하는 등의 방식을 사용합니다.   
+
  
  <br><br>
  
  
-### Frame, Packet, Segment, Datagram   
+### Frame, Packet, Segment, Datagram    
+ #### OSI 계층 별 데이터 단위   
+ - bit : 물리 계층   
+ - frame : 데이터링크 계층  
+ - packet : 네트워크 계층(IP)   
+ - segment : 전송 계층(TCP, UDP)    
+ - datagram : message 의 다른 말   
  
- 
+
  
  <br>
  
