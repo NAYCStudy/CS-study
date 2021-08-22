@@ -595,3 +595,120 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
  <br>
  
  
+ ### Socket  
+  #### Socket : 네트워크 상에서 동작하는 프로그램 간 통신의 Endpoint(연결부)    
+ 
+  - IP 주소와 port 번호로 최종 목적지를 나타낼 수 있습니다. 또한, 통신 프로토콜을 지정하여 통신하게 됩니다.  
+  - 소켓 통신은 두 프로그램 간 통신이기에 양쪽에서 모두 통신을 위한 소켓이 생성되어야 통신할 수 있습니다.    
+  - 일반적으로 서버 - 클라이언트 소켓 통신을 할 때 서버는 Listen(대기) 상태로 있으며 클라이언트가 통신 요청을 하면 이에 응답합니다.  
+  - TCP, UDP 프로토콜을 사용합니다.(전송계층)   
+ 
+ <img src="./images/socket.png" width="40%">
+ 
+ <br>
+ 
+ Socket.io 의 서버 측 소켓 준비 예시
+
+```
+var app = require('http').createServer(handler)
+var io = require('socket.io')(app);
+var fs = require('fs');
+
+app.listen(80);
+
+function handler (req, res) {
+  fs.readFile(__dirname + '/index.html',
+  function (err, data) {
+    if (err) {
+      res.writeHead(500);
+      return res.end('Error loading index.html');
+    }
+
+    res.writeHead(200);
+    res.end(data);
+  });
+}
+
+io.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+ 
+```
+ 
+ - 예시는 80번 포트에 바인드하여 해당 Endpoint를 통해 클라이언트의 요청에 대기하게 됩니다.   
+ - socket.emit()으로 클라이언트에게 데이터를 전달하며 socket.on()으로 클라이언트로부터 수신한 데이터를 받을 수 있습니다.   
+ - 서버는 클라이언트와 소켓을 통해 연결되게 되면 다른 클라이언트로부터의 통신 요청 또한 받기 위해 새로운 포트로 소켓을 생성하게 됩니다.   
+ 
+ <br>
+ 
+ * Java Socket I/O (Server Thread)
+```
+ public class SocketThreadServer extends Thread {
+	
+	private static final Logger logger = Logger.getLogger(SocketThreadServer.class);
+	
+	private Socket socket;
+
+	public SocketThreadServer(Socket socket){
+		this.socket=socket;
+	}
+	
+	//단순 문자열 Thread server
+	public void run(){
+		BufferedReader br = null;
+		PrintWriter pw = null;
+		try{
+			String connIp = socket.getInetAddress().getHostAddress();
+			System.out.println(connIp + "에서 연결 시도.");
+			
+			/*
+			 * 접근한 소켓 계정의 ip를 체크한다. KTOA 연동 모듈인지 체크 
+			 * 정상이면 먼저 정상 접근되었음을 알린다.
+			 **/
+			br = new BufferedReader(
+			        new InputStreamReader(socket.getInputStream()));
+			
+			pw = new PrintWriter(socket.getOutputStream());
+			
+			// 클라이언트에서 보낸 문자열 출력
+			System.out.println(br.readLine());
+			
+			// 클라이언트에 문자열 전송
+			pw.println("수신되었다. 오버");
+			pw.flush();		
+		}catch(IOException e){
+			logger.error(e);
+		}finally{
+			try{
+				if(pw != null) { pw.close();}
+				if(br != null) { br.close();}
+				if(socket != null){socket.close();}
+			}catch(IOException e){
+				logger.error(e);
+			}
+		}
+	}
+}
+ 
+```  
+ <br><br>
+ 
+### Socket.io VS webSocket   
+ 
+ 
+ <br><br>
+ 
+ 
+### Frame, Packet, Segment, Datagram   
+ 
+ 
+ 
+ <br>
+ 
+-----
+ 
+ 
+ 
