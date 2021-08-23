@@ -550,7 +550,7 @@ CORS 지원을 활성화 하는 방식은 API 통합 유형에 따라 상이합�
   <br>
  
  ### REST API와 RESTful 개념   
-  #### REST : Representaion State Transfer 의 약자입니다.   
+  #### REST : Representation State Transfer 의 약자입니다.   
  <img src="./images/rest.png" width="35%">   
  
   - REST 는 3가지 요소로 구성됩니다.  리소스, 메소드, 메시지   
