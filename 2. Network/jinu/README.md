@@ -728,7 +728,16 @@ io.on('connection', function (socket) {      // 연결되었을 때의 이벤트
  - segment : 전송 계층(TCP, UDP)    
  - datagram : message 의 다른 말   
  
+	
+ ![image](https://user-images.githubusercontent.com/58026613/130393018-3d3a1200-ffe6-4861-ab34-50d10cf52d8b.png)  
 
+	
+ - frame, packet, segment 모두 payload data 부분은 동일합니다.   
+ - 각 헤더 정보    
+   -> frame : MAC Address  
+   -> pacekt : IP Address  
+   -> segment : Port Number  
+ 
  
  <br>
  
