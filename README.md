@@ -18,18 +18,15 @@
 
 
 ## 📣 공지사항!
- - 8.7 다음 스터디는 8.28(토) 11:00 예정!
- - 8.28 까지 아래 내용 학습!
- - 8.28 까지 각자 '질문모음집'에 문제 해결해보기! + 질문사항 자유롭게 ReadMe.md 에 추가! 
+ - 8.27(금) 다음 스터디는 9.6 19:00 예정!
+ - 9.6 까지 아래 내용 학습!
+ - 9.6 까지 각자 '질문모음집'에 문제 해결해보기! + 질문사항 자유롭게 ReadMe.md 에 추가! 
  
- ----------- 네트워크 끝까지 정리하기!     
- - GET 메서드와 POST 메서드  
- - 쿠키(Cookie)와 세션(Session)  
- - DNS  
- - REST와 RESTful의 개념  
- -소켓(Socket)이란  
- - Socket.io와 WebSocket의 차이  
- - Frame, Packet, Segment, Datagram  
+ ----------- Spring   
+ - Spring 프레임워크란?  
+ - Spring, Spring MVC 1, 2 패턴, Spring Boot와 차이점  
+ - Bean  
+ - Container  
  
  <br>
  
