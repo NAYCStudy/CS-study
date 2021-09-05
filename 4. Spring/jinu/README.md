@@ -19,7 +19,7 @@
  
  <br>
  
- __제어의 역전 [Inversion of Control]__  
+ __제어의 역전 [Inversion of Control]__   
  - 객체 생성, 호출에 대한 모든 권한을 Spring Framework에 위임하여 위임 받은 Spring 객체에 의해 제어되게 됩니다.  
  - 즉, 개발자가 객체를 제어하는 것이 아닌 Spring에게 해당 역할( __객체 생성 -> 의존성 주입 -> 초기화 -> 소멸__ )을 맡기는 것  
  - Ex. new 객체 생성, 의존성 주입, 초기화, 소멸 작업 등등  
@@ -30,17 +30,19 @@
 
 <br>
 
- __의존성 주입 [Dependency Injection]__    
- - 의존성 주입은 제어의 역전 특징 중 하나의 하위 개념이다.   
- - 스프링 컨테이너가 특정 객체(Bean)에 다른 객체(Bean)와의 의존성을 맺어주는 행위   
+ __의존성 주입 [Dependency Injection]__   
+ - 의존성 주입은 제어의 역전 특징 중 하나의 하위 개념이다.  
+ - 스프링 컨테이너가 특정 객체(Bean)에 다른 객체(Bean)와의 의존성을 맺어주는 행위  
  - 즉, 하나의 객체가 다른 객체를 사용할 수 있도록 연결짓는 것  
- - 3가지 DI 방식 : 필드 주입 / Setter 주입 / 생성자 주입   
-
+ - 3가지 DI 방식 : 필드 주입 / Setter 주입 / 생성자 주입  
+ <br> 
+ 
  - 필드주입 : 코드는 가장 간단하지만 외부에서 변경이 불가능하므로 지양되는 주입 방식  
  ```
  @Autowired
  private ExampleServcie exampleService;
  ```
+ <br>
  
  - Setter 주입 : Field 변수를 변경할 수 있는 Setter를 통해 의존성을 주입하는 방식 (주입 객체가 수정될 가능성이 있는 경우 사용)  
  ```
@@ -51,6 +53,7 @@
      this.exampleService = exampleService;
  }
  ```
+ <br>
  
  - 생성자 주입 : 생성자를 호출하는 시점에 1회 주입하는 것이 보장, 생성자 1개만 있을 경우 @Autowird 생략 가능   
  _장점_   
