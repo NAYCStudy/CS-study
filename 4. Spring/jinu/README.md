@@ -57,9 +57,11 @@
  &nbsp; 1. 생성자 주입을 통해 주입 객체의 불변성 보장   
  &nbsp; 2. 생성자 주입을 통해 객체 1회 주입 보장  
  &nbsp; 3. 의존 객체에 final 키워드 사용 가능, 컴파일 시점에 누락된 객체 확인 가능   
- &nbsp; 4. 순환 참조 에러 방지 __(추후 정리하기!)__  
+ &nbsp; 4. 순환 참조 에러 방지 __(추후 정리하기!)__   
+ &nbsp; 5. 무분별한 객체 주입 방지   
  ```
  @Service
+ 
  public class ExampleServiceImpl implements ExampleService {
      private ExampleDAO exampleDAO;
      private SampleService sampleService;
