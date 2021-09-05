@@ -1,3 +1,4 @@
+- https://blog.naver.com/jinwoo6612/222483423436   
 
 ## Spring   
  <img src="./images/Spring.png" width="50%" float="center">  
@@ -127,7 +128,7 @@
  <br>
  <br>
  
- #### MVC 패턴  
+ ### MVC 패턴  
  - MVC : 웹 애플리케이션 개발에 있어 가장 많이 정형적으로 쓰이는 디자인 패턴   
  - Model, View, Controller    
  - Model : 데이터 처리를 담당, Service & DAO 영역으로 나누어집니다.  
@@ -143,5 +144,12 @@
  - MVC2 패턴   
  ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png) 
 
+ [View - Controller - Model]   
+  
+ ### Spring VS Spring Boot  
+ - Spring Framework와 Spring Boot Framework 차이점과 특징   
+ 가장 큰 차이점  
+ &nbsp; - 스프링의 경우 AOP, DI, DL, POJO 특징을 가지고 웹 애플리케이션 개발을 위한 다양한 기능을 갖추고 있지만 기본 프로젝트 세팅에 있어 개발자에게 많은 시간 투자를 필요로 합니다.   
+ &nbsp; - 스프링 부트의 경우 복잡한 프로젝트 설정을 자동화하고 @AutoConfiguration을 통해 애플리케이션 개발에 필요한 모든 내부 Dependency를 관리합니다.   
  
  
