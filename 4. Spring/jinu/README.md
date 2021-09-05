@@ -1,6 +1,6 @@
 
-### Spring  
- #### 스프링 프레임워크  
+## Spring  
+ ### 스프링 프레임워크  
  - Java 플랫폼을 위한 오픈소스 애플리케이션 프레임워크  
  - 웹 애플리케이션 개발에 필요한 기능을 종합적으로 제공하는 경량화 솔루션  
  - 경량 컨테이너로서 java 객체를 직접 관리  
@@ -24,9 +24,114 @@
  - 장점2 : 객체 간 의존 관계를 쉽게 변경가능  
  - 장점3 : 결론적으로 코드 재사용성, 유지보수성 증가  
 
+<br>
 
- __의존성 주입 [Dependency Injection]__   
+ __의존성 주입 [Dependency Injection]__    
  - 의존성 주입은 제어의 역전 특징 중 하나의 하위 개념이다.   
  - 스프링 컨테이너가 특정 객체(Bean)에 다른 객체(Bean)와의 의존성을 맺어주는 행위   
- - 
+ - 즉, 하나의 객체가 다른 객체를 사용할 수 있도록 연결짓는 것  
+ - 3가지 DI 방식 : 필드 주입 / Setter 주입 / 생성자 주입   
+
+ - 필드주입 : 코드는 가장 간단하지만 외부에서 변경이 불가능하므로 지양되는 주입 방식  
+ ```
+ @Autowired
+ private ExampleServcie exampleService;
+ ```
+ 
+ - Setter 주입 : Field 변수를 변경할 수 있는 Setter를 통해 의존성을 주입하는 방식 (주입 객체가 수정될 가능성이 있는 경우 사용)  
+ ```
+ private ExampleService exampleService;
+
+ @Autowired
+ public void setExampleService(ExampleService exampleService){
+     this.exampleService = exampleService;
+ }
+ ```
+ 
+ - 생성자 주입 : 생성자를 호출하는 시점에 1회 주입하는 것이 보장, 생성자 1개만 있을 경우 @Autowird 생략 가능     
+ ```
+ @Service
+ public class ExampleServiceImpl implements ExampleService {
+     private ExampleDAO exampleDAO;
+     private SampleService sampleService;
+
+     @Autowired    // 생성자가 1개만 있을 경우 @Autowired를 생략해도 주입이 가능
+     public ExampleServiceImpl(ExampleDAO exampleDAO, SampleService sampleService) {
+         this.exampleDAO = exampleDAO;
+         this.sampleService = sampleService;
+     }
+ }
+
+ @Controller
+ public class ExampleController {
+
+  private final ExampleService exampleService = new ExampleService(new ExampleDAO(), new SampleService());
+ }
+ ```
+
+ *생성자 주입을 쓰자!!
+ 
+ <br>
+  
+ __POJO : Getter/Setter를 포함한 단순 오브젝트__  
+ - 특정 규약에 종속되지 않는 단순한 오브젝트  
+ - 객체 지향의 개념을 준수합니다.  
+ - 특정 환경에 종속되지 않습니다.  
+ - > 객체 지향 프로그래밍에 적절합니다.   
+ ```
+ public home {
+    private String name;
+    private float[] location;
+    private int price;
+
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setLocation(float[] location){
+        this.location = location;
+    }
+    public void setPrice(int price){
+        this.price = price;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+    public float[] getLocation(){
+        return this.location;
+    }
+    public int getPrice(){
+        return this.name;
+    }
+    
+ ```
+ 
+ <br>
+ 
+ __AOP : 관점 지향 프로그래밍__  
+ - 관심사가 같은 데이터를 한 곳에 모아 관리하고 낮은 결합도 높은 응집도를 갖도록 독립접인 모듈로 캡슐화하는 것을 의미
+ - 개발 과정 중복되는 코드가 발생하게 되고 이를 보완하기 위해 AOP가 등장했습니다.
+ - 핵심기능과 공통기능을 분리 -> 공통 기능에 대해서 재사용 될 수 있도록 분리해두고 핵심 로직에 영향을 끼치지 않도록 기능을 끼워넣는 형태로 사용   
+ - 재사용성 극대화 -> 프로그래밍/개발 속도 증대  
+
+ <br>
+ <br>
+ 
+ #### MVC 패턴  
+ - MVC : 웹 애플리케이션 개발에 있어 가장 많이 정형적으로 쓰이는 디자인 패턴  
+ - Model, View, Controller   
+ - Model : 데이터 처리를 담당, Service & DAO 영역으로 나누어집니다.  
+ - View : 사용자에게 보여지는 부분, 사용자 인터페이스 담당, JSP & Vue & React   
+ - Controller : Model, View 연결 담당, 전반적 서비스 제어 담당, Controller   
+
+ <br> 
+ 
+ MVC1 패턴   
+ ![image](https://user-images.githubusercontent.com/58026613/132129745-f9dd37e2-4ab9-4e7d-b69e-77f163dcc577.png)
+
+ 
+ MVC2 패턴   
+ ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png)
+
+ 
  
