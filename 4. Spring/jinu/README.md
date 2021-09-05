@@ -1,9 +1,11 @@
 
-## Spring  
- ### 스프링 프레임워크  
+## Spring   
+ <img src="./images/Spring.png" width="50%" float="center">  
+ 
+ ### 스프링 프레임워크   
  - Java 플랫폼을 위한 오픈소스 애플리케이션 프레임워크  
  - 웹 애플리케이션 개발에 필요한 기능을 종합적으로 제공하는 경량화 솔루션  
- - 경량 컨테이너로서 java 객체를 직접 관리  
+ - 경량 컨테이너로서 java 객체를 직접 관리   
 
  <br>
  
@@ -49,6 +51,11 @@
  ```
  
  - 생성자 주입 : 생성자를 호출하는 시점에 1회 주입하는 것이 보장, 생성자 1개만 있을 경우 @Autowird 생략 가능     
+ *장점  
+ 1. 생성자 주입을 통해 주입 객체의 불변성 보장   
+ 2. 생성자 주입을 통해 객체 1회 주입 보장  
+ 3. 의존 객체에 final 키워드 사용 가능, 컴파일 시점에 누락된 객체 확인 가능   
+ 4. 순환 참조 에러 방지 __(추후 정리하기!)__  
  ```
  @Service
  public class ExampleServiceImpl implements ExampleService {
@@ -73,8 +80,8 @@
  
  <br>
   
- __POJO : Getter/Setter를 포함한 단순 오브젝트__  
- - 특정 규약에 종속되지 않는 단순한 오브젝트  
+ __POJO : Getter/Setter를 포함한 단순 오브젝트__    
+ - 특정 규약에 종속되지 않는 단순한 오브젝트   
  - 객체 지향의 개념을 준수합니다.  
  - 특정 환경에 종속되지 않습니다.  
  - > 객체 지향 프로그래밍에 적절합니다.   
@@ -108,30 +115,33 @@
  
  <br>
  
- __AOP : 관점 지향 프로그래밍__  
- - 관심사가 같은 데이터를 한 곳에 모아 관리하고 낮은 결합도 높은 응집도를 갖도록 독립접인 모듈로 캡슐화하는 것을 의미
- - 개발 과정 중복되는 코드가 발생하게 되고 이를 보완하기 위해 AOP가 등장했습니다.
- - 핵심기능과 공통기능을 분리 -> 공통 기능에 대해서 재사용 될 수 있도록 분리해두고 핵심 로직에 영향을 끼치지 않도록 기능을 끼워넣는 형태로 사용   
+ __AOP : 관점 지향 프로그래밍__   
+ - 관심사가 같은 데이터를 한 곳에 모아 관리하고 낮은 결합도 높은 응집도를 갖도록 독립접인 모듈로 캡슐화하는 것을 의미  
+ - 개발 과정 중복되는 코드가 발생하게 되고 이를 보완하기 위해 AOP가 등장했습니다.   
+ - 핵심기능과 공통기능을 분리 -> 공통 기능에 대해서 재사용 될 수 있도록 분리해두고 핵심 로직에 영향을 끼치지 않도록 기능을 끼워넣는 형태로 사용    
  - 재사용성 극대화 -> 프로그래밍/개발 속도 증대  
 
+ __Spring Framework 구조__  
+ <img src="./images/springstructure.png" width="50%">  
+ 
  <br>
  <br>
  
  #### MVC 패턴  
- - MVC : 웹 애플리케이션 개발에 있어 가장 많이 정형적으로 쓰이는 디자인 패턴  
- - Model, View, Controller   
+ - MVC : 웹 애플리케이션 개발에 있어 가장 많이 정형적으로 쓰이는 디자인 패턴   
+ - Model, View, Controller    
  - Model : 데이터 처리를 담당, Service & DAO 영역으로 나누어집니다.  
- - View : 사용자에게 보여지는 부분, 사용자 인터페이스 담당, JSP & Vue & React   
- - Controller : Model, View 연결 담당, 전반적 서비스 제어 담당, Controller   
+ - View : 사용자에게 보여지는 부분, 사용자 인터페이스 담당, JSP & Vue & React    
+ - Controller : Model, View 연결 담당, 전반적 서비스 제어 담당, Controller    
 
  <br> 
  
- MVC1 패턴   
- ![image](https://user-images.githubusercontent.com/58026613/132129745-f9dd37e2-4ab9-4e7d-b69e-77f163dcc577.png)
+ - MVC1 패턴    
+ ![image](https://user-images.githubusercontent.com/58026613/132129745-f9dd37e2-4ab9-4e7d-b69e-77f163dcc577.png) 
 
- 
- MVC2 패턴   
- ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png)
+  
+ - MVC2 패턴   
+ ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png) 
 
  
  
