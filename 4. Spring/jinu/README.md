@@ -130,7 +130,10 @@
  - 핵심기능과 공통기능을 분리 -> 공통 기능에 대해서 재사용 될 수 있도록 분리해두고 핵심 로직에 영향을 끼치지 않도록 기능을 끼워넣는 형태로 사용    
  - 재사용성 극대화 -> 프로그래밍/개발 속도 증대  
 
+ <br>
+
  __Spring Framework 구조__   
+ 
  <img src="./images/springstructure.png" width="50%">   
  
  - Spring Core : Spring Framework 핵심 기능 제공, 주요 컴포넌트 BeanFactory   
