@@ -160,10 +160,14 @@
   
  - MVC2 패턴   
  ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png) 
-
+ 
+ <br>
+ 
  [View - Controller - Model]   
   
- ### Spring VS Spring Boot  
+ <br><br>
+  
+ ### Spring VS Spring Boot   
  - Spring Framework와 Spring Boot Framework 차이점과 특징<설정 자동화>   
  가장 큰 차이점!  
  &nbsp; - 스프링의 경우 AOP, DI, DL, POJO 특징을 가지고 웹 애플리케이션 개발을 위한 다양한 기능을 갖추고 있지만 기본 프로젝트 세팅에 있어 개발자에게 많은 시간 투자를 필요로 합니다.   
@@ -190,21 +194,22 @@
 
   즉, Spring에서 Bean는 Spring 컨테이너가 알고 있는 객체를 의미합니다.   
   
-  <br>
+  <br> 
   
-  Spring 컨테이너에 Bean 객체를 등록하는 방법?  
-  1. Component Scan 을 통해 등록  
-  2. Bean 설정 파일에 직접 Bean 정보를 등록  
+  Spring 컨테이너에 Bean 객체를 등록하는 방법?   
+  1. Component Scan 을 통해 등록   
+  2. Bean 설정 파일에 직접 Bean 정보를 등록   
   
   __Component Scan__   (in Spring Boot)
   - 방법 : @ComponenScan 어노테이션과 @Component(Controller, Service, Repository)를 통해 Bean 등록   
+  <img src="./images/component.png" width="40%">   
   @ComponentScan : Component로 등록할 객체를 찾을 범위(Scope)를 알려주는 역할  
   @Component : 실제 Bean으로 등록할 객체(클래스)를 의미    
   
   Spring Boot의 경우 @SpringBootApplication 어노테이션 내부적으로 @ComponentScan을 포함합니다.   
   @SpringBootApplication : ComponentScan, EnableAutoConfiguration, SpringBootConfiguration   
   
-  <br>
+  <br> 
   
   (in Spring)  
   - xml bean 설정 파일 등록  
@@ -265,7 +270,7 @@
   
   ```
   
-  <br><br>
+  <br><br> 
   
  ### Container  
   #### Container?  
@@ -274,9 +279,11 @@
   - Bean 생명 주기 관리  
   - 애플리케이션을 구성하는 Bean을 관리하기 위해 Inversion Of Control 특징을 가집니다.   
   
-  <br>
+  <br> 
   
   __Bean Factory__   
+  <img src="./images/beanFactory.png" width="40%">  
+  
   1. Bean 객체를 생성, 관리하는 클래스  
   2. Factory Pattern의 구현체  
   3. getBean()이 호출되면 Factory는 의존성 주입을 위해 Spring Container가 가지고 있는 Bean을 인스턴스화하고 Bean 생성 & 설정 시작   
@@ -288,7 +295,7 @@
    final Ret ret = sampleService.method1(parameter1, parameter2);
   ```
   
-  <br>
+  <br> 
   
   __Application Context__   
   1. Bean Factory에서 확장 및 향상된 컨테이너  
@@ -299,7 +306,15 @@
   * Context 초기화 시점 : Servlet, Listener, Filter 등 초기화 시점  
   * @PostConstruct : 특정 클래스 내 메소드에 붙여 사용하며, 객체 내 모든 Bean이 초기화 된 직후 최초 1회 실행을 보장합니다.(비즈니스 로직 중 초기 설정에 주로 사용)   
  
-  <br><br>
+  <br><br> 
   
  
- ### 
+ ### MVC2 패턴과 Spring 설정 파일들   
+ 
+ MVC2  
+ ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png)  
+ 
+ <br>
+ 
+ 
+  
