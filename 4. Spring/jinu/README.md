@@ -164,8 +164,8 @@
  [View - Controller - Model]   
   
  ### Spring VS Spring Boot  
- - Spring Framework와 Spring Boot Framework 차이점과 특징   
- 가장 큰 차이점  
+ - Spring Framework와 Spring Boot Framework 차이점과 특징<설정 자동화>   
+ 가장 큰 차이점!  
  &nbsp; - 스프링의 경우 AOP, DI, DL, POJO 특징을 가지고 웹 애플리케이션 개발을 위한 다양한 기능을 갖추고 있지만 기본 프로젝트 세팅에 있어 개발자에게 많은 시간 투자를 필요로 합니다.   
  &nbsp; - 스프링 부트의 경우 복잡한 프로젝트 설정을 자동화하고 @AutoConfiguration을 통해 애플리케이션 개발에 필요한 모든 내부 Dependency를 관리합니다.   
  
@@ -174,7 +174,7 @@
  __Spring Boot__  
  - Spring MVC 사용시 Component Scan, Dispatcher Servlet, View Resolver 등 설정을 간단하게 설정할 수 있도록 합니다.   
  - Spring 프레임워크 설정의 많은 부분을 Boot가 자동화하여줍니다.   
- - Spirng과는 달리 Spring Boot 내장 WAS(Default: Tomcat)를 통해 서버를 실행할 수 있습니다.  
+ - Spirng과는 달리 Spring Boot 내장 WAS(Default: Tomcat)를 통해 서버를 실행할 수 있습니다.  (Jetty(경량 & 소규모), Undertow(대규모 & 안정적))  
  - Spring-Boot-Starter는 의존성 및 설정, 버전 호환을 자동화하여주는 모듈입니다.   
  - > spring-boot-starter-jpa : spring-aop, spring-jdbc 의존성을 자동으로 설정  
  
@@ -192,5 +192,114 @@
   
   <br>
   
+  Spring 컨테이너에 Bean 객체를 등록하는 방법?  
+  1. Component Scan 을 통해 등록  
+  2. Bean 설정 파일에 직접 Bean 정보를 등록  
   
+  __Component Scan__   (in Spring Boot)
+  - 방법 : @ComponenScan 어노테이션과 @Component(Controller, Service, Repository)를 통해 Bean 등록   
+  @ComponentScan : Component로 등록할 객체를 찾을 범위(Scope)를 알려주는 역할  
+  @Component : 실제 Bean으로 등록할 객체(클래스)를 의미    
   
+  Spring Boot의 경우 @SpringBootApplication 어노테이션 내부적으로 @ComponentScan을 포함합니다.   
+  @SpringBootApplication : ComponentScan, EnableAutoConfiguration, SpringBootConfiguration   
+  
+  <br>
+  
+  (in Spring)  
+  - xml bean 설정 파일 등록  
+  ```
+  <?xml version="1.0" encoding="UTF-8"?>
+  <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+      <bean id="dog" class="com.spring.Dog">
+          <property name="myName" value="poodle"></property>
+      </bean>
+
+      <bean id="cat" class="com.spring.Cat">
+          <property name="myName" value="bella"></property>
+      </bean>
+
+      <bean id="petOwner" class="com.spring.PetOwner" scope="singleton">
+          <constructor-arg name="animal" ref="dog"></constructor-arg>
+      </bean>
+  </beans>
+  ```
+  
+  <br>
+  
+  __Bean 설정 파일에 Bean을 직접 등록__  
+  - 방법 : 자바 클래스를 생성하여 xxxConfiguration 과 같이 명명한 객체에 @Configuration 어노테이션을 붙여줌으로써 직저 Spring Bean 설정을 진행합니다.  
+  Bean을 직접 등록하면 객체에 @Component 어노테이션을 붙이지 않아도 됩니다.  
+  ```
+  @Configuration
+  public class SampleConfiguration {
+      @Bean     // Bean 등록  
+      public SampleController sampleController() {
+          return new SampleController;
+      }
+  }
+  ```
+  
+  <br>
+  
+  #### Spring Container에 등록된 Bean은 의존성 주입을 통해 주입되거나 관리, 소멸 됩니다.   
+  #### Bean은 기본적으로 Singleton 형태로 존재합니다. (scope 설정 가능. Ex. scope="prototype")   
+  **Singleton** : 객체를 계속해서 생성하는 것이 아닌 최초 1회만 할당하여 사용하는 디자인 패턴, Container 내 단 하나의 객체만 존재   
+  **Prototype** : Container 내 하나의 Bean 정의에 대해 다수 객체가 존재 가능  
+  ```
+  // Singleton Design 
+  
+  private static SampleComponent sampleComponent = null;
+  
+  public static getInstance SampleComponent() {
+    if(sampleComponent == null){
+      sampleComponent = new SampleComponent();
+    }
+    return sampleComponent;
+  }
+  
+  ```
+  
+  <br><br>
+  
+ ### Container  
+  #### Container?  
+  - Spring Container는 개발자 대신 인스턴스 Life Cycle을 관리하고 객체의 생성, 주입, 소멸을 제어합니다.   
+  - Java 객체(Bean)를 담고있습니다.  
+  - Bean 생명 주기 관리  
+  - 애플리케이션을 구성하는 Bean을 관리하기 위해 Inversion Of Control 특징을 가집니다.   
+  
+  <br>
+  
+  __Bean Factory__   
+  1. Bean 객체를 생성, 관리하는 클래스  
+  2. Factory Pattern의 구현체  
+  3. getBean()이 호출되면 Factory는 의존성 주입을 위해 Spring Container가 가지고 있는 Bean을 인스턴스화하고 Bean 생성 & 설정 시작   
+  4. Bean 의존성 주입  
+  > getBean()메소드를 호출하면 Bean Factory는 Bean을 인스턴스화 및 설정하여 생성된 Bean을 반환합니다.  
+  ```
+   final BeanFactory beanFactory = new AnnotationConfigApplicationContext(AppConfig.class);
+   final SampleService sampleService = beanFactory.getBean("sampleService", SampleService.class);
+   final Ret ret = sampleService.method1(parameter1, parameter2);
+  ```
+  
+  <br>
+  
+  __Application Context__   
+  1. Bean Factory에서 확장 및 향상된 컨테이너  
+  2. Bean Factory의 기본 기능을 포함하며 Spring이 제공하는 부가 서비스를 추가적으로 제공합니다.   
+  3. Bean Factory와 달리 Context 초기화 시점에 모든 Singleton Bean을 미리 로드한 후 애플리케이션을 시동하며 이후 Bean을 바로바로 가져올 수 있습니다.   
+  
+  > Bean Factory(getBean())와 Appliation Context(Context 초기화)의 Bean 생성 및 로드 시점이 서로 다릅니다.  
+  * Context 초기화 시점 : Servlet, Listener, Filter 등 초기화 시점  
+  * @PostConstruct : 특정 클래스 내 메소드에 붙여 사용하며, 객체 내 모든 Bean이 초기화 된 직후 최초 1회 실행을 보장합니다.(비즈니스 로직 중 초기 설정에 주로 사용)   
+ 
+  <br><br>
+  
+ 
+ ### 
