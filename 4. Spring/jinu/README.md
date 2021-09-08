@@ -205,7 +205,7 @@
   
   <br>
   
-  __Component Scan__   (in Spring Boot)
+  1) __Component Scan__   (in Spring Boot)
   - 방법 : @ComponentScan 어노테이션과 @Component(Controller, Service, Repository)를 통해 Bean 등록   
   <img src="./images/component.png" width="40%">   
   @ComponentScan : Component로 등록할 객체를 찾을 범위(Scope)를 알려주는 역할  
@@ -242,7 +242,7 @@
   
   <br>
   
-  __Bean 설정 파일에 Bean을 직접 등록__  
+ 2)  __Bean 설정 파일에 Bean을 직접 등록__  
   - 방법 : 자바 클래스를 생성하여 xxxConfiguration 과 같이 명명한 객체에 @Configuration 어노테이션을 붙여줌으로써 직접 Spring Bean 설정을 진행합니다.  
   Bean을 직접 등록하면 객체에 @Component 어노테이션을 붙이지 않아도 됩니다.  
   ```
