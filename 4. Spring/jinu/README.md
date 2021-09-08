@@ -286,7 +286,7 @@
   
   <br> 
   
-  __Bean Factory__   
+  __1. Bean Factory__   
   <img src="./images/beanFactory.png" width="40%">  
   
   1. Bean 객체를 생성, 관리하는 클래스  
@@ -302,7 +302,7 @@
   
   <br> 
   
-  __Application Context__   
+  __2. Application Context__   
   1. Bean Factory에서 확장 및 향상된 컨테이너  
   2. Bean Factory의 기본 기능을 포함하며 Spring이 제공하는 부가 서비스를 추가적으로 제공합니다.   
   3. Bean Factory와 달리 Context 초기화 시점에 모든 Singleton Bean을 미리 로드한 후 애플리케이션을 시동하며 이후 Bean을 바로바로 가져올 수 있습니다.   
