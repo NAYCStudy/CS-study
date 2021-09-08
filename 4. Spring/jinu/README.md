@@ -203,14 +203,16 @@
   1. Component Scan 을 통해 등록   
   2. Bean 설정 파일에 직접 Bean 정보를 등록   
   
+  <br>
+  
   __Component Scan__   (in Spring Boot)
-  - 방법 : @ComponenScan 어노테이션과 @Component(Controller, Service, Repository)를 통해 Bean 등록   
+  - 방법 : @ComponentScan 어노테이션과 @Component(Controller, Service, Repository)를 통해 Bean 등록   
   <img src="./images/component.png" width="40%">   
   @ComponentScan : Component로 등록할 객체를 찾을 범위(Scope)를 알려주는 역할  
   @Component : 실제 Bean으로 등록할 객체(클래스)를 의미    
   
   Spring Boot의 경우 @SpringBootApplication 어노테이션 내부적으로 @ComponentScan을 포함합니다.   
-  @SpringBootApplication : ComponentScan, EnableAutoConfiguration, SpringBootConfiguration   
+  @SpringBootApplication : @ComponentScan + @EnableAutoConfiguration + @SpringBootConfiguration   
   
   <br> 
   
@@ -241,7 +243,7 @@
   <br>
   
   __Bean 설정 파일에 Bean을 직접 등록__  
-  - 방법 : 자바 클래스를 생성하여 xxxConfiguration 과 같이 명명한 객체에 @Configuration 어노테이션을 붙여줌으로써 직저 Spring Bean 설정을 진행합니다.  
+  - 방법 : 자바 클래스를 생성하여 xxxConfiguration 과 같이 명명한 객체에 @Configuration 어노테이션을 붙여줌으로써 직접 Spring Bean 설정을 진행합니다.  
   Bean을 직접 등록하면 객체에 @Component 어노테이션을 붙이지 않아도 됩니다.  
   ```
   @Configuration
@@ -319,5 +321,10 @@
  
  <br>
  
- 
-  
+ - servlet-context.xml : Servlet에서 요청과 관련된 객체를 정의합니다 / Controller, ViewResolver, Interceptor, MultipartResolver, HandlerMapping 등 설정을 합니다.  
+ - root-context.xml : View와 관련되지 않은 객체를 정의합니다 / Service, Repository, DB 등 비즈니스 로직 관련 설정을 합니다.  
+ - web.xml : WAS 관련 설정을 적용하기 위한 설정파일 / WAS가 최초 구동 시 각종 설정을 정의해줍니다 / 타 xml 파일을 인식하도록 각 xml 설정파일 위치를 알려줍니다.  
+
+ - ViewResolver : 
+ - DispatcherServlet : 
+ - ComponentScan : 
