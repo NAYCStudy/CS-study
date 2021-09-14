@@ -325,8 +325,8 @@
  - root-context.xml : View와 관련되지 않은 객체를 정의합니다 / Service, Repository, DB 등 비즈니스 로직 관련 설정을 합니다.  
  - web.xml : WAS 관련 설정을 적용하기 위한 설정파일 / WAS가 최초 구동 시 각종 설정을 정의해줍니다 / 타 xml 파일을 인식하도록 각 xml 설정파일 위치를 알려줍니다.  
 
- - ViewResolver : 
- - DispatcherServlet : 
+ - View Resolver : 
+ - Dispatcher Servlet : http 프로토콜 모든 요청을 가장 먼저 받는 곳이며 적합한 컨트롤러로 위임해주는 역할을 합니다. Front Controller로 정의할 수 있습니다.  
  - ComponentScan : 
 
 
@@ -367,7 +367,7 @@
  
  <br>
  
- <img src="daodto.png" width="50%">
+ <img src="dtodao.png" width="50%">
  
  __DTO : Data Transfer Object__ 로 계층간 데이터 교환을 위한 역할을 합니다. DB에서 조회한 데이터를 저장하는 Entity를 통해 만든 일종의 Wrapper 객체   
  > 계층간 데이터 교환을 위한 객체이므로 특별한 로직을 가지지 않고 순수한 POJO 형식의 객체입니다.  
@@ -386,12 +386,20 @@
 
  ```
 
- <br>
+ <br><br>  
 
 ### Spring JDBC 활용   
-
+ - Plain JDBC API와 달리 Spring JDBC를 통해 DB Access를 보다 쉽게 할 수 있습니다.   
  - JDBC : Java Database Connectivity, DB에 접근할 수 있도록 Java에서 제공하는 API    
  - JDBC Driver : Java 프로그램 요청을 DBMS가 이해할 수 있는 통신 프로토콜로 변환해주는 Adapter, DBMS 마다 상이     
+ <br> 
+ 
+ - Spring JDBC가 대신해주는 일   
+ 1. Connection Poll 객체 생성, 소멸   
+ 2. ResultSet 조회 결과 처리  
+ 3. 예외 처리   
+ 4. JDBCTemplate을 통한 Select, Insert, Update, Delete 작업 처리  
+ 
  <br> 
  
  - DataSource : JDBC의 일부로서 일반화된 DB 연결 Factory 입니다. DB Connection 정보를 가지고 있으며 Spring에서 Bean(객체)으로 등록하게 됩니다. 이후 Spring은 DataSource를 통해 DB와 연결을 할 수 있습니다.   
@@ -401,8 +409,10 @@
   > Connection Pool 기능(DB Connection을 미리 생성해두었다가 요청 시 즉시 꺼내어 사용하는 방식 )     
   > Transaction 처리   
  
+ 
  - DataSource 이용하는 방법   
- > 의존성 : Spring JDBC, common-dbcp, mysql connector  
+ 
+ > 의존성 : Spring JDBC, common-dbcp, mysql connector, transaction    
  ```
  <dependency>
     <groupId>org.springframework</groupId>
@@ -411,17 +421,22 @@
  </dependency>
  <dependency>
     <groupId>commons-dbcp</groupId>
-    <artifactId>commons-dbcp</artifactId>
-    <version>1.4</version>
+    <artifactId>commons-dbcp2</artifactId>
+    <version>2.1.1</version>
  </dependency>
  <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.38</version>
+    <version>5.1.45</version>
+ </dependency>
+ <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-tx</artifactId>
+    <version>${spring.version}</version>
  </dependency>
  ```
  
- > .properties file 
+ > .properties file  
  ```
  jdbc.driver = com.mysql.jdbc.Driver 
  jdbc.url = jdbc:mysql//localhost:3306/databaseSchema 
@@ -440,7 +455,53 @@
        <property name="password" value="${jdbc.password}" />
  </bean>
  ```
+ <br><br> 
+ 
+ ### Filter와 Interceptor   
+  #### Filter : Dispatcher Servlet 요청 전/후로 url 패턴에 따라 부가적인 작업을 할 수 있습니다.   
+  #### Interceptor : Spring 제공 기술로 Dispatcher Servlet에 요청이 닿은 후 url 패턴에 맞는 Controller 호출 전/후에 부가적인 작업을 할 수 있습니다.   
+  
+ <img src="context.png" width="60%">
+ 
+  __Filter
+  
+  - init : 객체 초기화 & 서비스에 추가하기 위한 메소드, 최초 1회 init 메소드를 통해 필터 객체를 초기화하고 이후 doFilter를 통해 처리합니다.   
+  - doFilter : url Pattern에 맞는 모든 http 요청이 Dispatcher Servlet에 전달되기 전/후에 실행되는 메소드입니다.(인코딩 설정 주로 사용)   
+  - destroy : 필터 객체를 서비스에서 제거하는 메소드입니다.   
+ 
+  ```
+  public interface Filter {
+     public default void init(FilterConfig filterConfig) throws ServletException {}
+   
+   
+     public void doFilter(ServletRequest request, ServletResponse response,
+       FilterChain chain) throws IOException, ServletException;
+       
+     public default void destroy() {}
+     
+  }
+  ```
  <br>
  
-
+ __Interceptor
+ 
+ - PreHandle : Controller 호출 전 실행되며 return 값에 따라 Controller로 요청이 이어질지 결정됩니다.(사용자 인증에 주로 사용)   
+ - PostHandle : Controller 호출 후 실행되며 ModelAndView 타입 정보가 제공됩니다.   
+ - afterCompletion : 모든 작업이 완료된 후 실행 (사용한 리소스 반환 필요 시 사용)
+ ```
+ public interface HandlerInterceptor {
+    default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+        throws Exception {
+        
+        return true / false;
+    }
+  
+    default void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+         @Nullable ModelAndView modelAndView) throws Exception {
+         
+    }
+    
+ ```
+ 
+ 
  
