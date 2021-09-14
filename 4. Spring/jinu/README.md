@@ -328,3 +328,119 @@
  - ViewResolver : 
  - DispatcherServlet : 
  - ComponentScan : 
+
+
+ <br><br> 
+
+ ### DAO와 DTO   
+ 
+ __DAO : Data Access Object__ 로 DB에 접근하는 객체입니다, Service Layer와 Persistance Layer사이를 연결하는 역할을 합니다.    
+ > Mybatis Framework : DAO 객체를 통해 Mapper class를 이용하여 Service ~ DB 통신  
+ > JPA Framework(ORM) : Model Entity를 통해 DB 객체를 Mapping하고 Repository 객체를 통해 DB와 통신   
+ 
+ JDBC DAO(Plain JDBC API 이용)  
+ ```
+ public dto methodDao(String id) throws SQLException {
+   String sql = "select id, num from test where id=?";
+   Connection conn = null;
+   PreparedStatement pstmt = null;
+   ResultSet rset = null;
+   TestDTO dto = null;
+
+   try {
+       conn = ds.getConnection();
+       pstmt = conn.prepareStatement(sql);
+       pstmt.setString(1, id);
+       rset = pstmt.executeQuery();
+
+       if(rset.next()){
+           dto = new TestDTO(rset.getString(1), rset.getInt(2));
+       }
+   }finally{
+       if(rset!=null) rset.close();
+       if(pstmt!=null) pstmt.close();
+       if(conn!=null) conn.close();
+   }
+   return dto;
+ }
+ ```
+ 
+ <br>
+ 
+ <img src="daodto.png" width="50%">
+ 
+ __DTO : Data Transfer Object__ 로 계층간 데이터 교환을 위한 역할을 합니다. DB에서 조회한 데이터를 저장하는 Entity를 통해 만든 일종의 Wrapper 객체   
+ > 계층간 데이터 교환을 위한 객체이므로 특별한 로직을 가지지 않고 순수한 POJO 형식의 객체입니다.  
+ > VO와 DTO의 차이: VO와 DTO는 같은 개념이지만 DTO는 계층간 데이터 교환, VO는 읽기만 가능한 Read-Only 객체로서 데이터 자체에 의미를 두고 있다는 점이 다릅니다.   
+
+ ```
+ package model.dto;
+
+ @Getter
+ @Setter
+ @Builder
+ public class TestDTO {
+     private String id;
+     private int num;
+ }
+
+ ```
+
+ <br>
+
+### Spring JDBC 활용   
+
+ - JDBC : Java Database Connectivity, DB에 접근할 수 있도록 Java에서 제공하는 API    
+ - JDBC Driver : Java 프로그램 요청을 DBMS가 이해할 수 있는 통신 프로토콜로 변환해주는 Adapter, DBMS 마다 상이     
+ <br> 
+ 
+ - DataSource : JDBC의 일부로서 일반화된 DB 연결 Factory 입니다. DB Connection 정보를 가지고 있으며 Spring에서 Bean(객체)으로 등록하게 됩니다. 이후 Spring은 DataSource를 통해 DB와 연결을 할 수 있습니다.   
+ - DataSource : JDBC Driver 벤더(Oracle, Mysql, Postgre)에 따라 여러가지로 존재합니다.    
+ - DataSource 역할   
+  > DB와 연결   
+  > Connection Pool 기능(DB Connection을 미리 생성해두었다가 요청 시 즉시 꺼내어 사용하는 방식 )     
+  > Transaction 처리   
+ 
+ - DataSource 이용하는 방법   
+ > 의존성 : Spring JDBC, common-dbcp, mysql connector  
+ ```
+ <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>${org.springframework-version}</version>
+ </dependency>
+ <dependency>
+    <groupId>commons-dbcp</groupId>
+    <artifactId>commons-dbcp</artifactId>
+    <version>1.4</version>
+ </dependency>
+ <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.38</version>
+ </dependency>
+ ```
+ 
+ > .properties file 
+ ```
+ jdbc.driver = com.mysql.jdbc.Driver 
+ jdbc.url = jdbc:mysql//localhost:3306/databaseSchema 
+ jdbc.username = root
+ jdbc.password = 1234
+ ```
+ 
+ > root-context.xml (DB 설정 파일) , Spring Bean으로 등록  
+ ```
+ <context:property-placeholder location="com/spring/props/jdbc.properties"/>
+ 
+ <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+       <property name="driverClassName" value="${jdbc.driverClassName}" />
+       <property name="url" value="${jdbc.url}" />
+       <property name="username" value="${jdbc.username}" />
+       <property name="password" value="${jdbc.password}" />
+ </bean>
+ ```
+ <br>
+ 
+
+ 
