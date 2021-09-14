@@ -367,7 +367,7 @@
  
  <br>
  
- <img src="dtodao.png" width="50%">
+ <img src="./images/dtodao.png" width="50%">
  
  __DTO : Data Transfer Object__ 로 계층간 데이터 교환을 위한 역할을 합니다. DB에서 조회한 데이터를 저장하는 Entity를 통해 만든 일종의 Wrapper 객체   
  > 계층간 데이터 교환을 위한 객체이므로 특별한 로직을 가지지 않고 순수한 POJO 형식의 객체입니다.  
@@ -461,7 +461,7 @@
   #### Filter : Dispatcher Servlet 요청 전/후로 url 패턴에 따라 부가적인 작업을 할 수 있습니다.   
   #### Interceptor : Spring 제공 기술로 Dispatcher Servlet에 요청이 닿은 후 url 패턴에 맞는 Controller 호출 전/후에 부가적인 작업을 할 수 있습니다.   
   
- <img src="context.png" width="60%">
+ <img src="./images/context.png" width="60%">
  
   __Filter
   
