@@ -334,9 +334,13 @@
 
  ### DAO와 DTO   
  
+  <br>
+  
  __DAO : Data Access Object__ 로 DB에 접근하는 객체입니다, Service Layer와 Persistance Layer사이를 연결하는 역할을 합니다.    
  > Mybatis Framework : DAO 객체를 통해 Mapper class를 이용하여 Service ~ DB 통신  
  > JPA Framework(ORM) : Model Entity를 통해 DB 객체를 Mapping하고 Repository 객체를 통해 DB와 통신   
+ 
+ <br>
  
  JDBC DAO(Plain JDBC API 이용)  
  ```
@@ -367,12 +371,12 @@
  
  <br>
  
- <img src="./images/dtodao.png" width="50%">
- 
  __DTO : Data Transfer Object__ 로 계층간 데이터 교환을 위한 역할을 합니다. DB에서 조회한 데이터를 저장하는 Entity를 통해 만든 일종의 Wrapper 객체   
  > 계층간 데이터 교환을 위한 객체이므로 특별한 로직을 가지지 않고 순수한 POJO 형식의 객체입니다.  
  > VO와 DTO의 차이: VO와 DTO는 같은 개념이지만 DTO는 계층간 데이터 교환, VO는 읽기만 가능한 Read-Only 객체로서 데이터 자체에 의미를 두고 있다는 점이 다릅니다.   
-
+ 
+ <img src="./images/dtodao.png" width="50%">
+ 
  ```
  package model.dto;
 
@@ -409,6 +413,7 @@
   > Connection Pool 기능(DB Connection을 미리 생성해두었다가 요청 시 즉시 꺼내어 사용하는 방식 )     
   > Transaction 처리   
  
+ <br>
  
  - DataSource 이용하는 방법   
  
@@ -463,7 +468,8 @@
   
  <img src="./images/context.png" width="60%">
  
-  __Filter
+ 
+  __Filter__
   
   - init : 객체 초기화 & 서비스에 추가하기 위한 메소드, 최초 1회 init 메소드를 통해 필터 객체를 초기화하고 이후 doFilter를 통해 처리합니다.   
   - doFilter : url Pattern에 맞는 모든 http 요청이 Dispatcher Servlet에 전달되기 전/후에 실행되는 메소드입니다.(인코딩 설정 주로 사용)   
@@ -483,7 +489,8 @@
   ```
  <br>
  
- __Interceptor
+ 
+ __Interceptor__
  
  - PreHandle : Controller 호출 전 실행되며 return 값에 따라 Controller로 요청이 이어질지 결정됩니다.(사용자 인증에 주로 사용)   
  - PostHandle : Controller 호출 후 실행되며 ModelAndView 타입 정보가 제공됩니다.   
