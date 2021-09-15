@@ -314,7 +314,7 @@
   <br><br> 
   
  
- ### MVC2 패턴과 Spring 설정 파일들   
+ ### MVC2 패턴과 Spring 설정 파일들 + Client 요청부터 응답까지 흐름   
  
  MVC2  
  ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png)  
@@ -325,11 +325,23 @@
  - root-context.xml : View와 관련되지 않은 객체를 정의합니다 / Service, Repository, DB 등 비즈니스 로직 관련 설정을 합니다.  
  - web.xml : WAS 관련 설정을 적용하기 위한 설정파일 / WAS가 최초 구동 시 각종 설정을 정의해줍니다 / 타 xml 파일을 인식하도록 각 xml 설정파일 위치를 알려줍니다.  
 
- - View Resolver : 
+ - View Resolver : View(JSP)를 선택하는 것은 Controller인데 컨트롤러에서 매번 뷰를 생성하는 것은 비효율적이므로 Spring에서 해당 작업을 분리시켜 View Resolver가 탄생했습니다.  
+        -> Controller는 View의 논리적 이름만 반환하고 Dispatcher Servlet의 View Resolver가 받아서 사용할 View 객체를 찾고 생성하는 작업을 대신 진행합니다.   
+        -> View Resolver 는 View 객체를 캐싱하고 있기에 반복적으로 View를 생성하지 않아도 되는 장점이 있습니다.   
+ ```
+ <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/view" />
+    <property name="suffix" value=".jsp" />
+ </bean>     // View Resolver는 Controller로부터 View 이름을 받아 prefix, suffix를 붙여 해당 View를 생성합니다.  
+ ```
+ 
  - Dispatcher Servlet : http 프로토콜 모든 요청을 가장 먼저 받는 곳이며 적합한 컨트롤러로 위임해주는 역할을 합니다. Front Controller로 정의할 수 있습니다.  
- - ComponentScan : 
+ - ComponentScan : Component를 Scan할 범위 설정  
 
+ > Dispatcher Servlet에서 요청을 처리하는 Routine   
+ <img src="./images/routine.PNG" width="60%">
 
+ 
  <br><br> 
 
  ### DAO와 DTO   
