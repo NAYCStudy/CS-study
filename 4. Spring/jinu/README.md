@@ -339,7 +339,7 @@
  - ComponentScan : Component를 Scan할 범위 설정  
 
  > Dispatcher Servlet에서 요청을 처리하는 Routine   
- <img src="./images/routine.PNG" width="60%">
+ <img src="./images/routine.png" width="60%">
 
  
  <br><br> 
