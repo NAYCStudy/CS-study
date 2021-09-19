@@ -411,7 +411,7 @@
  <br> 
  
  - Spring JDBC가 대신해주는 일   
- 1. Connection Poll 객체 생성, 소멸   
+ 1. Connection Pool(DataSource가 관리) 객체 생성, 소멸   
  2. ResultSet 조회 결과 처리  
  3. 예외 처리   
  4. JDBCTemplate을 통한 Select, Insert, Update, Delete 작업 처리  
