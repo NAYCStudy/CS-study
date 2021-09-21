@@ -483,6 +483,9 @@
  
   __Filter__
   
+  - WAS 수준의 Web Container에 의해 관리됩니다.   
+  - Spring Framework와 무관하게 전역적으로 처리해야할 작업을 수행합니다.   
+  > 사용 예 : 문자 Encoding, 요청에 대한 보안작업, 데이터 압축    
   - init : 객체 초기화 & 서비스에 추가하기 위한 메소드, 최초 1회 init 메소드를 통해 필터 객체를 초기화하고 이후 doFilter를 통해 처리합니다.   
   - doFilter : url Pattern에 맞는 모든 http 요청이 Dispatcher Servlet에 전달되기 전/후에 실행되는 메소드입니다.(인코딩 설정 주로 사용)   
   - destroy : 필터 객체를 서비스에서 제거하는 메소드입니다.   
@@ -504,6 +507,9 @@
  
  __Interceptor__
  
+ - Spring Context에서 동작합니다.  
+ - Client의 요청과 관련하여 Spring Context에서 전역적으로 처리할 작업을 수행합니다.   
+ > 사용 예 : 인증/인가 검증작업, Controller로 넘기는 데이터 가공, 로깅   
  - PreHandle : Controller 호출 전 실행되며 return 값에 따라 Controller로 요청이 이어질지 결정됩니다.(사용자 인증에 주로 사용)   
  - PostHandle : Controller 호출 후 실행되며 ModelAndView 타입 정보가 제공됩니다.   
  - afterCompletion : 모든 작업이 완료된 후 실행 (사용한 리소스 반환 필요 시 사용)
