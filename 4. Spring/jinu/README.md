@@ -485,10 +485,10 @@
   
   - WAS 수준의 Web Container에 의해 관리됩니다.   
   - Spring Framework와 무관하게 전역적으로 처리해야할 작업을 수행합니다.   
-  > 사용 예 : 문자 Encoding, 요청에 대한 보안작업, 데이터 압축    
+  > 사용 예 : 문자 Encoding, 요청에 대한 보안작업(XSS Protect), 데이터 압축    
   - init : 객체 초기화 & 서비스에 추가하기 위한 메소드, 최초 1회 init 메소드를 통해 필터 객체를 초기화하고 이후 doFilter를 통해 처리합니다.   
   - doFilter : url Pattern에 맞는 모든 http 요청이 Dispatcher Servlet에 전달되기 전/후에 실행되는 메소드입니다.(인코딩 설정 주로 사용)   
-  - destroy : 필터 객체를 서비스에서 제거하는 메소드입니다.   
+  - destroy : 필터 객체를 서비스에서 제거하는 메소드입니다. 호출 이후부터는 doFilter가 처리되지 않습니다.    
  
   ```
   public interface Filter {
