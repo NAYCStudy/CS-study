@@ -1,7 +1,9 @@
 
 ## 디자인 패턴
 
-<br>  
+<br>   
+
+<img src="./images/designpattern.png" width="60%">
 
 ### Design Pattern의 개념   
  #### Design Pattern : SW 개발에 사용되는 디자인 패턴은 프로그램 개발(로직, 데이터 구조)에 자주 발생하는 문제를 해결하기 위한 방법들 중 하나입니다.    
