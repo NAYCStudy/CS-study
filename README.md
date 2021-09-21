@@ -7,7 +7,7 @@
 
 
 ## 📝 Study Rule
- - When? 매주 토요일 Algorithm 스터디 이후 (11:30-12:00) 사이 시작~
+ - When? 매주 토요일 Algorithm 스터디 이후 (11:00-12:00) 사이 시작~
  - Where? 코로나니까! 집콕! in Google Meet, Discode, Zoom
  - How? 1. 매주 주어진 범위에 대해 각자 자유롭게 학습 및 CS 내용 정리!
  - How? 2. Notion, Blog, Git, 손필기 등 자유롭게 정리한 것 온라인으로 공유할 수 있도록 링크 혹은 다양한 방법으로 준비!
@@ -18,20 +18,13 @@
 
 
 ## 📣 공지사항!
- - 다음 스터디는 9.11 10:30 예정!
- - 9.11 까지 아래 내용 학습!
- - 9.11 까지 각자 '질문모음집'에 문제 해결해보기! + 질문사항 자유롭게 ReadMe.md 에 추가! 
+ - 다음 스터디는 9.25 21:00 예정!
+ - 9.25 까지 아래 내용 학습!
+ - 9.25 까지 각자 '질문모음집'에 문제 해결해보기! + 질문사항 자유롭게 ReadMe.md 에 추가! 
  
- ----------- Spring   
- - Spring 프레임워크란?  
- - Spring, Spring MVC 1, 2 패턴, Spring Boot와 차이점  
- - Bean  
- - Container
- - IOC(Inversion of Control, 제어의 역전)란
- - MVC 패턴이란
- - DI(Dependency Injection, 의존성 주입)란
- - AOP(Aspect Oriented Programming)란
- - POJO
+#### Design Pattern   
+ - 디자인 패턴의 개념과 종류
+
  
  <br>
  
