@@ -73,9 +73,59 @@
  <br> 
  
  자바 싱글톤 구현 방식   
- i. 이른 초기화 : static 키워드를 이용하여 정적 바인딩을 통해 메모리에 미리 올려두는 방식입니다.  
- - static : 컴파일 시점에 메모리에 로드   
- ii.  
- iii.  
  
+ i. Eager Initializing(이른 초기화) : static 키워드를 이용하여 정적 바인딩을 통해 메모리에 미리 올려두는 방식입니다.   
+ > static : 컴파일 시점에 메모리에 로드   
+ > 클래스가 최초로 로딩될 때 객체가 생성되므로 Thread-Safe 합니다.  
+ 
+ ii. 'Synchronized' initialization(게으른 동기화 블럭) : 메소드에 동기화 Block을 지정하여 Thread-Safe Singleton을 보장합니다.  
+ > 객체(인스턴스)가 필요한 시점에 요청하여 동적으로 런타임에 객체를 생성하는 방식입니다.  
+ > 따라서, 객체 생성 여부와 상관 없이 무조건 객체를 가져오기 위해서 Synchronized Block을 거쳐야합니다. -> 속도가 느립니다.   
+ 
+ iii. DCL(Double Checking Locking) : 동기화 블럭 방식이며 객체가 생성되지 않은 경우만 동기화 블럭을 실행하는 구조입니다.     
+ > 'volatile' 키워드를 통해 멀티스레드 환경에서 변수 불일치 문제 해결 -> Thread Safe  
+ 
+ iv. Lazy Holder(게으른 홀더) : 키워드 사용없이 동시성 문제를 해결하는 방식으로 런타임에 객체를 생성/초기화 하는 구조입니다.   
+ > 키워드를 사용하지 않음으로서 성능이 뛰어나고 많이 사용되는 싱글톤 구현 방식입니다.  
+
+ <br>
+ 
+ Singleton 구현 방식  
+ ```
+ // Eager Initialization
+ // : static 정적 바인딩을 통해 컴파일 시점에 객체가 최초로 생성되며 getInstance() 메소드를 통해 객체에 접근하게 됩니다.  
+ public class Singleton {
+    private static Singleton uniqueInstance = new Singleton();
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+      return uniqueInstance; 
+    } 
+ }
+ 
+ ---------------------------
+ 
+ // Lazy Initialization with Synchronized  
+ // : 키워드를 이용한 동기화 블럭 구현 방식으로 객체를 호출하는 시점에 객체 생성여부를 확인하고 Singleton 객체를 반환합니다.   
+ public class Singleton {
+    private static Singleton uniqueInstance;
+
+    private Singleton() {}
+
+    public static synchronzied Singleton getInstance() {
+      if(uniqueInstance == null) {
+         uniqueInstance = new Singleton();
+      }
+      return uniqueInstance;
+    }
+  }
+  
+  ---------------------------
+  
+  // 
+  
+ ```
+
+  
 https://webdevtechblog.com/%EC%8B%B1%EA%B8%80%ED%84%B4-%ED%8C%A8%ED%84%B4-singleton-pattern-db75ed29c36
