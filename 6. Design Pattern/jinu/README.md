@@ -82,10 +82,11 @@
  > 객체(인스턴스)가 필요한 시점에 요청하여 동적으로 런타임에 객체를 생성하는 방식입니다.  
  > 따라서, 객체 생성 여부와 상관 없이 무조건 객체를 가져오기 위해서 Synchronized Block을 거쳐야합니다. -> 속도가 느립니다.   
  
- iii. DCL(Double Checking Locking) : 동기화 블럭 방식이며 객체가 생성되지 않은 경우만 동기화 블럭을 실행하는 구조입니다.     
- > 'volatile' 키워드를 통해 멀티스레드 환경에서 변수 불일치 문제 해결 -> Thread Safe  
+ iii. DCL(Double Checked Locking) : 동기화 블럭 방식이며 객체가 생성되지 않은 경우만 동기화 블럭을 실행하는 구조입니다.     
+ > 여러 Thread 들의 접근에 대해 Double Checking을 하므로 Thread Safe 하다고 생각할 수 있지만 내부적으로 Assembly 코드 단계로 내려가면(CPU 명령어 수행 단계) 안전하지 않다는 것을 알 수 있습니다. 
+ > 'volatile' 키워드를 사용하여 해당 문제를 해결할 수 있다고 하지만 여전히 재배치문제(컴파일된 소스코드의 순서가 재배치되는 현상)로 Thread Safe 하지 않다고 합니다.  
  
- iv. Lazy Holder(게으른 홀더) : 키워드 사용없이 동시성 문제를 해결하는 방식으로 런타임에 객체를 생성/초기화 하는 구조입니다.   
+ iv. Lazy Holder(게으른 홀더) : 키워드 사용없이 동시성 문제를 해결하는 방식으로 런타임에 객체(Inner Class) 초기화를 통해 원자성을 보장하는 Singleton 구조입니다.   
  > 키워드를 사용하지 않음으로서 성능이 뛰어나고 많이 사용되는 싱글톤 구현 방식입니다.  
 
  <br>
@@ -104,10 +105,12 @@
     } 
  }
  
+ * 컴파일 시점에 메모리에 객체가 이미 생성되어 있는 상태이므로 Thread 여러개가 동시에 getInstance() 메소드를 호출해도 안전합니다.  
+ 
  ---------------------------
  
  // Lazy Initialization with Synchronized  
- // : 키워드를 이용한 동기화 블럭 구현 방식으로 객체를 호출하는 시점에 객체 생성여부를 확인하고 Singleton 객체를 반환합니다.   
+ // : Synchronized 키워드를 이용한 동기화 블럭 구현 방식으로 객체를 호출하는 시점에 객체 생성여부를 확인하고 Singleton 객체를 반환합니다.   
  public class Singleton {
     private static Singleton uniqueInstance;
 
@@ -121,11 +124,90 @@
     }
   }
   
+  * getInstance() 메소드에 synchronized 키워드를 사용하여 Thread가 동시에 호출하더라도 1 Thread 씩 메소드를 실행하여 객체를 반환하므로 Thread Safe 합니다.  
+  
   ---------------------------
   
-  // 
+  // Double Checked Locking 
+  // : 인스턴스가 생성되지 않은 경우에만 Synchronized 키워드 블럭이 실행되는 구조입니다.  
+  public class Singleton {
+    private volatile static Singleton uniqueInstance;
+    
+    private Singleton() {}
+    
+    public static Singleton getInstance() {
+      if(uniqueInstance == null){
+        synchronized(Singleton.class) {
+          if(uniqueInstance == null) {     // double check
+            uniqueInstance = new Singleton();
+          }
+        }
+      }
+      return uniqueInstance;
+    }
+  }
+  
+   * Time Sharing Machine의 멀티스레드 환경에서 DCL Singleton 방식 <- 이론적으로는 맞으나 실제 환경에서는 안전하지 않다.
+   <이론>
+   1. T1은 getInstance()메소드를 통해 객체를 반환받으려 합니다.
+   2. T1은 instance가 null이므로 synchronized 블럭으로 넘어갑니다.
+   3. T1은 T2에게 선점됩니다. (T2 차례)
+   4. T2가 getInstance()메소드를 통해 객체를 반환받으려 합니다.
+   5. T2는 instance가 null이므로 synchronized 메소드로 들어가려 시도합니다.
+   6. 하지만, T1이 synchronized lock을 가지고 있기에 T2는 대기합니다.  
+   7. T2는 T1에 의해 선점됩니다. (T1 차례)
+   8. T1는 if()절을 만족하므로 uniqueInstance에 객체를 할당받습니다. 
+   9. T1는 Synchronized 블록을 종료하고 객체를 반환하면서 lock을 반환합니다. 
+   10. T1는 T2에 의해 선점됩니다. (T2 차례) 
+   11. T2는 synchronized 블럭으로 들어가 instance가 null인지 검사합니다.
+   12. instance에 Singleton 객체가 담겨있기에(not null) 두번째 Singleton 객체는 만들어지지 않고 T1에 의해 만들어졌던 Singleton 객체를 바로 반환합니다.  
+   
+   -> 그렇다면 Thread Unsafe한 이유는??
+    -> T1이  uniqueInstance = new Singleton(); 에서 객체를 생성하려는 시점(객체 생성자가 완전히 실행되지 않은상태)에 T2에 선점되고 T2는 uniqueInstance를 검사하는데 이때는 null이 아니므로 완전히 생성되지 않은 Singleton 객체를 반환해버리는 현상이 발생할 수 있습니다.
+     -> RAM 메모리의 객체가 CPU(레지스터)를 통해 가지고와서 객체 초기화(EX단계) 후 RAM으로 다시 전달되는 과정을 거쳐야 객체가 생성되는 것인데 'Synchronized'키워드는 해당 작업에 대한 원자성을 보장할 수 없으며 멀티코어CPU 에서는 각각의 전용 레지스터를 가지므로 레지스터의 데이터를 검사하더라도 일관성 문제가 발생할 수 있습니다. 
+     
+  ----------------------------
+  
+  // Lazy Holder 
+  // 별도의 키워드 없이 Thread Safe한 Singleton을 구현하는 방식으로 동적 바인딩을 이용하는 구조입니다.  
+  public class Singleton {
+    private Singleton() {}
+
+    // inner class인 InnerInstanceClazz
+    private static class InnerInstanceClazz() {
+        private static final Singleton uniqueInstance = new Singleton(); // InnerClass 초기화 과정에서 JVM이 Thread-Safe하도록 instance를 생성 
+    }
+
+    public static Singleton getInstance() {
+        return InnerInstanceClazz.instance;
+    }
+  }
+  /*
+  InnerInstanceClazz 내 변수가 없기에 static으로 선언된 클래스여도 클래스 로더가 컴파일 시점에 클래스를 초기화하지 않고 getInstance() 메소드를 통해 호출될 때 초기화되게 됩니다.
+  즉, 동적 바인딩(런타임에 객체 생성)을 통해 스레드마다 객체를 1개씩 가지는 Thread-Safe 특징을 가질 수 있습니다.  
+  또한, InnerInstanceClazz 내부의 Singleton 인스턴스는 static 키워드를 사용하여 클래스가 로딩되는 시점에 한번만 호출되어 생성되며 final 키워드를 통해 새로운 값이 할당되지 않도록 합니다.  
+  
+  1. T1이 getInstance()를 통해 객체를 반환받으려 합니다. 
+  2. T1의 instance 변수 접근에 의해 InnerInstanceClazz가 최초로 초기화 과정이 이루어집니다.  
+  3. T2에 의해 선점되어 T2가 getInstance() 객체를 통해 객체를 반환받으려 합니다.
+  4. 하지만 JVM은 객체 초기화의 원자적 수행을 보장하기에 T2는 instance 변수에 접근하기위해 객체 초기화 과정을 시작하지 못하고 대기상태로 들어가고 다시 T1에게 선점됩니다.
+  3. InnerInstanceClazz가 초기화 되면서 static 키워드를 가진 uniqueInstance(인스턴스) 생성도 동시에 이루어집니다.  
+  4. JVM(Java Virtual Machine)은 'Class 초기화 과정'에서 원자성을 보장합니다!!
+  5. final 선언을 통해 인스턴스가 1번만 할당되는 것을 보장합니다.
+  * 즉, JVM에 의해 객체 초기화 과정이 원자적으로 이루어지고 해당 과정 내에서 인스턴스에 Singleton()객체를 생성 및 할당합니다. 이후 다른 스레드는 한번 초기화된 객체의 인스턴스를 반환만 하게 됩니다.
+  
+  */
   
  ```
-
+ <img src="./images/dcl.png" width="40%"> 
+ 
+ 
+  ||이른 초기화|게으른 동기화 블럭|DCL|게으른 홀더|
+  |-|-|-|-|-|
+  |Thread Safe|O|O|X|O|
+  
+  
+  
+  
   
 https://webdevtechblog.com/%EC%8B%B1%EA%B8%80%ED%84%B4-%ED%8C%A8%ED%84%B4-singleton-pattern-db75ed29c36
