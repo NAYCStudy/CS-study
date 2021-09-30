@@ -214,10 +214,89 @@
   #### 전략 패턴 : 행위를 클래스로 캡슐화하여 동적으로 행위를 자유롭게 바꿀 수 있도록 한 패턴입니다.  
   
   - 비슷한 문제를 해결하는 알고리즘들이 클래스별로 캡슐화되어 있고 이들이 필요할 때 교체할 수 있도록하여 동일한 문제를 다른 알고리즘으로 해결할 수 있도록 만든 디자인 패턴입니다.   
-  - 즉, 전략(비즈니스 로직, 알고리즘)을 쉽게 수정할 수 있도록 도움을 주는 패턴입니다.   
-  - 행위에 대해 전략으로 모두 만들어두고 동적으로 수정이 필요한 경우 인터페이스를 통해 전략을 수정할 수 있도록합니다.   
+  - 즉, 전략(비즈니스 로직, 알고리즘)을 쉽게 수정할 수 있도록 도움을 주는 패턴입니다.    
+  - 행위에 대해 전략으로 모두 만들어두고 동적으로 수정이 필요한 경우 인터페이스를 통해 전략을 수정할 수 있도록합니다.    
   
-  <img src="./images/strategy.png" width="50%">  
+  <img src="./images/strategy.png" width="50%">   
   
+  <br> 
+  
+  __예시__   
+  > 서울 -> 대구 이동하는 문제에서 필요한 수단(인터페이스)과 각 행위별 전략(구현 클래스)  
+  > 이동 수단 / 결제 수단 / 짐 수단   
+  > - 이동 : 버스, 기차, 자가용, 비행기  
+  > - 결제 : 카드, 현금, 페이, 가상계좌   
+  > - 짐 : 백팩, 캐리어, 지게   
+
+  <br> 
+  
+  * 전략 패턴은 어떠한 기능을 수행하기 위해 캡슐화되어 숨겨진 전략(구현체)를 인터페이스를 통해 접근하여 수행합니다.   
+  
+  
+  ```
+  // 전략 인터페이스
+  package Strategy;
+
+  public interface Vaccine{
+    public void install();
+  }
+  
+  // 전략 인터페이스의 구현체
+  package Strategy;
+ 
+  public class NaverVaccine implements Vaccine{
+    @Override
+    public void install() {
+      System.out.println("네이버백신 설치");
+    }
+  }
+ 
+  public class V3Vaccine implements Vaccine{
+    @Override
+    public void install() {
+      System.out.println("V3백신 설치");
+    }
+  }
+  
+  // 클라이언트와 인터페이스를 연결해주기 위한 컨텍스트
+  package Strategy;
+ 
+  public class Installer {
+    private Vaccine vaccine;   // 인터페이스 선언
+
+    public void setVaccine(Vaccine vaccine) {
+      this.vaccine = vaccine;
+    }
+
+    public void install() {
+      vaccine.install();
+    }
+  }
+  
+  
+  // 클라이언트의 실행 부분
+  package Strategy;
+ 
+  public class Main {
+    public static void main(String[] args) {
+      Installer installerA = new Installer();   // 인터페이스와 연결을 도와줄 컨텍스트(객체)
+      Installer installerB = new Installer();
+
+      installerA.setVaccine(new NaverVaccine());	// 컨텍스트를 통해 사용할 전략(네이버백신) 셋팅
+      installerB.setVaccine(new NaverVaccine());	// 컨텍스트를 통해 사용할 전략(네이버백신) 셋팅
+
+      installerA.install();	 // 네이버 실행
+      installerB.install();	 // 네이버 실행
+
+      // installerB의 프로그램을 V3백신으로 바꾸기
+      installerB.setVaccine(new V3Vaccine());	// 전략을 네이버백신에서 V3백신으로 교체
+      installerB.install();	// V3 실행
+    }
+  }
+ 
+  ```
+  
+  <br>
+  <br>
   
   
