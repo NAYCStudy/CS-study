@@ -307,6 +307,8 @@
 
 
   <img src="./images/templatemethod.png" width="50%"> 
+  
+  <br>
 
   - 추상클래스를 이용해 기본적으로 구현하는 메소드와 추상클래스 상속을 통한 여러 구현 방식을 더해 동일한 작업에서 일부분을 선택적으로 사용할 수 있게 됩니다.   
   
@@ -373,7 +375,7 @@
   }  
   ```
   
-  <img src="./images/templatestructure.png" width="50%">  
+  <img src="./images/templatestructure.png" width="75%">  
   
   <br><br>
   
@@ -388,6 +390,8 @@
    
    
    <img src="factorymethod.png" width="40%">    
+   
+   <br>
    
    __구현의 2가지 방법__  
    1) Creator를 추상 클래스로 정의하고, 팩토리 메소드는 Abstract로 선언하는 벙식   
