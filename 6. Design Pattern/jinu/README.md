@@ -403,12 +403,12 @@
   // 메인 
   public class FactoryPatternTest {
     public static void main(String[] args) {
-         ShapeFactory shapeFactory = new ShapeFactory();
+         ShapeFactory shapeFactory = new ShapeFactory();    // 팩토리 클래스 생성 
 
-         Shape shape1 = shapeFactory.getShape("CIRCLE");
+         Shape shape1 = shapeFactory.getShape("CIRCLE");    // CIRCLE 객체 요청
          shape1.draw();
 
-         Shape shape2 = shapeFactory.getShape("SQUARE");
+         Shape shape2 = shapeFactory.getShape("SQUARE");    // SQUARE 객체 요청
          shape2.draw();
     }
   }
@@ -472,5 +472,12 @@
   ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png) 
 
   <br>
+  <br>
   
- 
+  -----
+  
+  > 싱글톤 패턴(생성) : __최초 1개의 객체 생성만 허용하여 나누어쓰며 Thread Safe__ 한 구현방식을 통해 멀티스레드 환경에서도 변수 일관성을 유지할 수 있도록 하는 구조입니다.   
+  > 전략 패턴(행위) : 인터페이스 상속을 통해 __행동에 대한 전략(클래스)을 여러개 준비__ 함으로써 동적으로 쉽게 전략을 변경할 수 있는 구조입니다.   
+  > 템플릿 메소드 패턴(행) : __하나의 추상 클래스 내에서 공통된 메소드 구현과 여러개의 추상 메소드 선언__ 방식을 가지는 메소드를 담아 클라이언트가 쉽게 원하는 메소드를 사용할 수 있도록 만든 구조입니다.   
+  > 팩토리 메소드 패턴(생성) : 객체와 객체 생성방식을 알 필요 없이 팩토리 메소드를 호출하여 __원하는 객체가 무엇인지만 알려주면 팩토리 메소드를 통해 객체를 반환__ 받는 구조입니다.   
+
