@@ -299,4 +299,174 @@
   <br>
   <br>
   
+ ### Template Method Pattern  
+  #### 템플릿 메소드 패턴 : 행위 패턴 중 하나로서 작업의 일부분을 서브 클래스로 캡슐화하여 작업을 수행하는 구조는 바꾸지 않으면서 부분적 단계에서 수행 내역을 바꾸는 패턴입니다.  
+  - 전체적으로는 동일한 작업을 수행하면서 부분적으로 다른 구문으로 구성된 메소드 코드 중복을 최소화하는데 유용합니다.   
+  - 부분적 알고리즘 코드의 재사용성이 높아집니다.   
+  - 단점 : 추상클래스와 구현 클래스간 복잡성이 증대되어 관리가 복잡해질 가능성이 있습니다.   
+
+
+  <img src="./images/templatemethod.png" width="50%"> 
+
+  - 추상클래스를 이용해 기본적으로 구현하는 메소드와 추상클래스 상속을 통한 여러 구현 방식을 더해 동일한 작업에서 일부분을 선택적으로 사용할 수 있게 됩니다.   
   
+  ```
+  // 클라이언트 측에서 사용하는 메인 함수  
+  public class HouseMain {
+   public static void main(String[] args) {
+     HouseTemplate houseType = new WoodenHouse();  // 추상클래스 HouseTemplate을 상속받은 WoodenHouse 클래스
+     houseType.buildHouse();
+     
+     houseType = new GlassHouse();
+     houseType.buildHouse();
+   }
+  }
+
+
+  // 추상 클래스 : 기본 구현된 메소드 + 서브 추상클래스를 통해 다양하게 구현할 메소드
+  public abstract class HouseTemplate {
+    public final void buildHouse(){
+     buildFoundation();
+     buildPillars();
+     buildWalls();
+     buildWindows();
+    }
+
+    //기본 구현
+    private void buildWindows() {
+     System.out.println("Building Glass Windows");
+    }
+
+    //서브클래스에서 직접 구현 할 메소드
+    public abstract void buildWalls();
+    public abstract void buildPillars();
+
+    private void buildFoundation() {
+     System.out.println("Building foundation with cement,iron rods and sand");
+    }
+  }
+  
+  
+  // 추상 클래스를 상속받아 구현이 필요한 추상 메소드 구현
+  public class WoodenHouse extends HouseTemplate {
+    @Override
+    public void buildWalls() {
+     System.out.println("Building Wooden Walls");
+    }
+
+    @Override
+    public void buildPillars() {
+     System.out.println("Building Pillars with Wood coating");
+    }
+  }
+  
+  public class GlassHouse extends HouseTemplate {
+    @Override
+    public void buildWalls() {
+     System.out.println("Building Glass Walls");
+    }
+
+    @Override
+    public void buildPillars() {
+     System.out.println("Building Pillars with glass coating");
+    }
+  }  
+  ```
+  
+  <img src="./images/templatestructure.png" width="50%">  
+  
+  <br><br>
+  
+  ### Factory Method Pattern    
+   #### 팩토리 메소드 패턴 : 객체 생성을 위한 인터페이스를 정의하고 인스턴스 생성은 서브클래스가 결정하게 되는 방식입니다.    
+    
+   - 객체 생성을 캡슐화하는 패턴입니다.    
+   - 서브클래스에 팩토리 메소드를 정의하고 팩토리 클라이언트는 메소드 호출을 통해 적절한 인스턴스(객체)를 반환 받습니다.    
+   - 생성할 클래스를 알지 못해도 팩토리 클래스가 클라이언트로부터 받은 요청에 따라 객체 생성을 대신 담당하고 반환합니다.      
+   - 확장성 있는 프로젝트 구성이 가능합니다.    
+   - 단점 : 객체가 늘어날 때 마다 하위 클래스 재정의로 인한 불필요한 객체 생성 가능성이 있습니다.   
+   
+   
+   <img src="factorymethod.png" width="40%">    
+   
+   __구현의 2가지 방법__  
+   1) Creator를 추상 클래스로 정의하고, 팩토리 메소드는 Abstract로 선언하는 벙식   
+   2) Creator가 구체 클래스이고, 팩토리 메소드의 기본 구현을 제공하는 방식   
+   
+  <br>
+   
+  ```
+  // 메인 
+  public class FactoryPatternTest {
+    public static void main(String[] args) {
+         ShapeFactory shapeFactory = new ShapeFactory();
+
+         Shape shape1 = shapeFactory.getShape("CIRCLE");
+         shape1.draw();
+
+         Shape shape2 = shapeFactory.getShape("SQUARE");
+         shape2.draw();
+    }
+  }
+  
+  // 인터페이스   
+  public interface Shape {
+   void draw();
+  }
+  
+  // 구현 클래스   
+  public class Square implements Shape{
+  @Override
+    public void draw() {
+     System.out.println("Square - draw() Method.");
+    }
+  }
+  
+  public class Circle implements Shape{
+   @Override
+   public void draw() {
+    System.out.println("Circle - draw() Method.");
+   }
+  }
+  
+  // 팩토리 클래스 : 팩토리 메소드 기능을 담은 클래스  
+  public class ShapeFactory {
+	
+     // 객체 생성 후 반환
+     public Shape getShape(String shapeType){    // 파라미터로 클라이언트가 요구하는 객체 받기  
+        if(shapeType == null) return null;
+        else if(shapeType.equalsIgnoreCase("CIRCLE")){
+           return new Circle();
+        } else if(shapeType.equalsIgnoreCase("SQUARE")){
+           return new Square();
+        }
+        return null;
+     }
+  }
+  ```
+   
+  - 클라이언트는 원하는 객체에 대한 메시지를 팩토리 메소드를 호출함으로써 요청하고 팩토리 메소드는 적절한 객체를 생성하여 반환합니다.    
+  - 이를 통해 객체 생성 방식의 변화가 생기더라도 유지보수성이 좋아지고 확장성이 높아집니다.   
+
+  
+  <br><br>
+  
+  ### MVC, MVC2 Pattern   
+   #### MVC 패턴 : Model - View - Controller 패턴으로 웹 애플리케이션 개발에 적합한 패턴입니다.   
+   
+  - Model : 데이터 처리를 담당, Service & DAO 영역으로 나누어집니다.  
+  - View : 사용자에게 보여지는 부분, 사용자 인터페이스 담당, JSP & Vue & React    
+  - Controller : Model, View 연결 담당, 전반적 서비스 제어 담당, Controller    
+
+  <br> 
+
+  - MVC1 패턴    
+  ![image](https://user-images.githubusercontent.com/58026613/132129745-f9dd37e2-4ab9-4e7d-b69e-77f163dcc577.png) 
+
+
+  - MVC2 패턴   
+  ![image](https://user-images.githubusercontent.com/58026613/132129746-795e4679-0010-4e7e-8bd5-a50f665ca828.png) 
+
+  <br>
+  
+ 
