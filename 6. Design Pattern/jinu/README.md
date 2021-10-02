@@ -389,7 +389,7 @@
    - 단점 : 객체가 늘어날 때 마다 하위 클래스 재정의로 인한 불필요한 객체 생성 가능성이 있습니다.   
    
    
-   <img src="factorymethod.png" width="40%">    
+   <img src="./images/factorymethod.png" width="40%">    
    
    <br>
    
