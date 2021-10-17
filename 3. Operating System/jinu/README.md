@@ -67,20 +67,20 @@
   
   <br>
  
-  * Thread Safe를 위한 방법들   
-  a. Thread Local Storage 활용 : 스레드에 독립적인 자원을 사용하여 계산을 진행함으로서 서로에 대한 주요 데이터 공유를 줄이는 방법(매개변수, 로컬변수 이용)    
-  b. Mutual Exclusion(상호배제) : 뮤텍스 락이나 세마포와 같은 자원 접근 Lock 방법을 통해 공유 자원에 대한 동시 접근을 통제합니다.   
-  c. Atomic Operation(원자적 수행) : 공유 자원에 접근할 때 Atomic한 연산을 통해 상호 배제(CS 구역 등에 대해)를 구현하여 공유 자원에 대한 동시 접근 통제.   
+ __Thread Safe를 위한 방법들__     
+ a. Thread Local Storage 활용 : 스레드에 독립적인 자원을 사용하여 계산을 진행함으로서 서로에 대한 주요 데이터 공유를 줄이는 방법(매개변수, 로컬변수 이용)    
+ b. Mutual Exclusion(상호배제) : 뮤텍스 락이나 세마포와 같은 자원 접근 Lock 방법을 통해 공유 자원에 대한 동시 접근을 통제합니다.   
+ c. Atomic Operation(원자적 수행) : 공유 자원에 접근할 때 Atomic한 연산을 통해 상호 배제(CS 구역 등에 대해)를 구현하여 공유 자원에 대한 동시 접근 통제.   
   
   
-  > 디자인 패턴의 Singleton 객체를 구현할 때 원자적으로 수행하는 방법과 코드를 명시해두었습니다.   
-  ▶️ [Singleton 내용](../../6.%20Design%20Pattern/jinu/README.md#싱글톤singleton)   
-  
-  > CS(Critical Section: 임계구역)은 공유 자원에 대한 독점 수행을 보장하는 영역을 뜻합니다. 커널 객체를 사용하지 않고 유저 모드 동기화를 지원합니다.   
-  <img src="./images/cs.png" width="40%"> 
-  
-  <br>
-  <br>
+ > 디자인 패턴의 Singleton 객체를 구현할 때 원자적으로 수행하는 방법과 코드를 명시해두었습니다.   
+ ▶️ [Singleton 내용](../../6.%20Design%20Pattern/jinu/README.md#싱글톤singleton)   
+
+ > CS(Critical Section: 임계구역)은 공유 자원에 대한 독점 수행을 보장하는 영역을 뜻합니다. 커널 객체를 사용하지 않고 유저 모드 동기화를 지원합니다.   
+ <img src="./images/cs.png" width="40%"> 
+
+ <br>
+ <br>
   
  ### 동기화 객체와 기법     
   #### 동기화 종류  
