@@ -70,7 +70,7 @@
   :arrow_forward: [내용](../6. Design Pattern/jinu/README.md)    
   :arrow_forward: [내용](../../6. Design Pattern/jinu/README.md)    
   :arrow_forward: [내용](6. Design Pattern/jinu/README.md)   
-  ▶️ [내용](../../6._Design_Pattern/jinu/README.md)
+  ▶️ [내용](../../6.%20Design%20Pattern/jinu/README.md)
   > 디자인 패턴의 Singleton 객체를 구현할 때 원자적으로 수행하는 방법과 코드를 명시해두었습니다.   
   > CS(Critical Section: 임계구역)은 공유 자원에 대한 독점 수행을 보장하는 영역을 뜻합니다. 커널 객체를 사용하지 않고 유저 모드 동기화를 지원합니다.   
   
