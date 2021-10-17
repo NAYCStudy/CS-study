@@ -77,7 +77,7 @@
  ▶️ [Singleton 내용](../../6.%20Design%20Pattern/jinu/README.md#싱글톤singleton)   
 
  > CS(Critical Section: 임계구역)은 공유 자원에 대한 독점 수행을 보장하는 영역을 뜻합니다. 커널 객체를 사용하지 않고 유저 모드 동기화를 지원합니다.   
- <img src="./images/cs.png" width="40%"> 
+ <img src="./images/cs.png" width="25%"> 
 
  <br>
  <br>
