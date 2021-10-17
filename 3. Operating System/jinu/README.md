@@ -66,7 +66,7 @@
   b. Mutual Exclusion(상호배제) : 뮤텍스 락이나 세마포와 같은 자원 접근 Lock 방법을 통해 공유 자원에 대한 동시 접근을 통제합니다.   
   c. Atomic Operation(원자적 수행) : 공유 자원에 접근할 때 Atomic한 연산을 통해 상호 배제(CS 구역 등에 대해)를 구현하여 공유 자원에 대한 동시 접근 통제.   
   
-  :arrow_forward: [내용](../../Design Pattern/jinu/README.md)    
+  :arrow_forward: [내용](/Design Pattern/jinu/README.md)    
   > 디자인 패턴의 Singleton 객체를 구현할 때 원자적으로 수행하는 방법과 코드를 명시해두었습니다.   
   > CS(Critical Section: 임계구역)은 공유 자원에 대한 독점 수행을 보장하는 영역을 뜻합니다. 커널 객체를 사용하지 않고 유저 모드 동기화를 지원합니다.   
   
