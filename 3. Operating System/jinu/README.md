@@ -86,7 +86,7 @@
   #### 동기화 종류  
   - 동기화 객체 : 말 그대로 동기화에 사용되는 객체라는 뜻입니다.  
   - 동기화 객체는 커널 모드 객체인 Mutex, Semaphore등이 있으며 유저 모드 구조체인 Critical Section이 있습니다.    
-  - 간단하게 동기화 객체는 Critical Section보다 복잡한 동기화 작업에 사용되며 Critical Section보다는 느립니다.   
+  - 간단하게 커널 모드 동기화 객체는 Critical Section보다 복잡한 동기화 작업에 사용되며 Critical Section보다는 느립니다.   
   - 동기화 기법은 유저 모드 동기화, 커널 모드 동기화로 나뉩니다.   
 
   <br>
