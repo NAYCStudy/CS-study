@@ -20,7 +20,7 @@
  |Stack 공유|X|X|
  |Heap 공유|O|X|  
  
- <img src="multithread.png" width="50%">  
+ <img src="./images/multithread.png" width="50%">  
  
  * code : 프로그램 코드 자체   
  * data : 정적 변수가 저장되는 영역   
