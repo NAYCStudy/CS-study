@@ -174,7 +174,7 @@
   <br>
   
   
-  장기 스케줄러(Long-term Scheduler) : Disk -> Memory   
+  __장기 스케줄러(Long-term Scheduler) : Disk -> Memory__   
   - 메모리(RAM)과 디스크 사이 스케줄링을 담당합니다.    
   - '작업 스케줄러'라고도 불립니다.   
   - 디스크로부터 프로세스를 메모리에 올려 Ready 상태로 대기할 프로세스를 선택하여 Ready Queue로 보내는 역할   
@@ -185,7 +185,7 @@
   
   <br>
   
-  중기 스케줄러(Mid-term Scheduler) : Memory -> Disk   
+  __중기 스케줄러(Mid-term Scheduler) : Memory -> Disk__  
   - 메모리와 디스크 사이 스케줄링을 담당합니다.  
   - 메인 메모리(RAM)이 여유공간 마련을 위해 프로세스를 디스크로 내려보내는 역할   
   - 메모리에 할당된 프로세스를 해제하여 메모리 공간을 확보합니다.   
@@ -193,7 +193,7 @@
  
   <br>
   
-  단기 스케줄러(Short-term Scheduler) : Memory -> CPU   
+  __단기 스케줄러(Short-term Scheduler) : Memory -> CPU__   
   - CPU(중앙처리장치)와 메모리 사이 스케줄링을 담당합니다.   
   - Ready Queue에 있는 프로세스 중 어떤 프로세스를 Running 상태로 올릴지 결정하는 역할   
   - 프로세스를 CPU에 할당(Dispatch)  
