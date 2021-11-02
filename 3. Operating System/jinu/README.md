@@ -161,15 +161,15 @@
   
   <img src="./images/scheduler.png" width="70%">     
   
-  a. new -> Ready : 프로세스 생성, 디스크(Job Queue) -> 메모리(Ready Queue)      
-  b. ready -> running : 단기 스케줄러에 의해 프로세스가 CPU에 할당    
-  c-1. running -> ready : Time out 인터럽트 발생으로 할당되었던 프로세스가 Ready Queue로 돌아옴   
-  c-2. running -> blocked : 외부 I/O 작업으로 인해 Ready Queue가 아닌 Blocked 상태로 들어가서 스스로 나올 수 없고 I/O 작업이 완료 된 후 Ready Queue로 복귀 가능   
-  c-3. running -> terminated : 프로세스 작업이 끝나서(프로세스 종료) 메모리에서 해제되는 상태    
-  d-1. blocked, ready -> suspended(중지) : 중기 스케줄러에 의해 메모리에서 디스크로 프로세스가 Swap out 되는 것(Blocked 프로세스를 우선적으로 Swap out)   
-  d-2. suspended -> blocked, ready : 디스크에서 메모리로 프로세스가 Swap In 되는 것     
-  e. blocked -> ready : Block 되었던 프로세스의 I/O 작업이 끝나서 Ready Queue로 이동하여 실행을 대기하는 상태     
-  f. running mode : user mode(일반 명령어 실행 등), kernel mode(시스템 콜, 슈퍼바이저 콜 등 커널의 명령어 수행과 같은 작업 필요 시)    
+  a. __new -> Ready__ : 프로세스 생성, 디스크(Job Queue) -> 메모리(Ready Queue)      
+  b. __ready -> running__ : 단기 스케줄러에 의해 프로세스가 CPU에 할당    
+  c-1. __running -> ready__ : Time out 인터럽트 발생으로 할당되었던 프로세스가 Ready Queue로 돌아옴   
+  c-2. __running -> blocked__ : 외부 I/O 작업으로 인해 Ready Queue가 아닌 Blocked 상태로 들어가서 스스로 나올 수 없고 I/O 작업이 완료 된 후 Ready Queue로 복귀 가능   
+  c-3. __running -> terminated__ : 프로세스 작업이 끝나서(프로세스 종료) 메모리에서 해제되는 상태    
+  d-1. __blocked, ready -> suspended(중지)__ : 중기 스케줄러에 의해 메모리에서 디스크로 프로세스가 Swap out 되는 것(Blocked 프로세스를 우선적으로 Swap out)   
+  d-2. __suspended -> blocked, ready__ : 디스크에서 메모리로 프로세스가 Swap In 되는 것     
+  e. __blocked -> ready__ : Block 되었던 프로세스의 I/O 작업이 끝나서 Ready Queue로 이동하여 실행을 대기하는 상태     
+  f. __running mode__ : user mode(일반 명령어 실행 등), kernel mode(시스템 콜, 슈퍼바이저 콜 등 커널의 명령어 수행과 같은 작업 필요 시)    
   
   <br>
   
