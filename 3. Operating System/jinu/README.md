@@ -108,5 +108,119 @@
   3. Semaphore Lock : 동시에 제한된 개수의 스레드가 접근할 수 있도록 관리하는 동기화 객체입니다. 뮤텍스 락과 방식이 비슷하지만 동기 접근 가능한 개수를 설정함으로써 최대 동시 접근을 제어하는 것이 차이점입니다. 예시로 10000명의 Client가 동시 접속하는 서버에 최대 100명까지만 특정 영역에 동시에 접근할 수 있도록 제한하는 역할에 사용될 수 있습니다.   
 
  <br>
+ <br>
+ 
+ ### 뮤텍스와 세마포어  
+  #### Mutex vs Semaphore   
+  - 두 기법은 모두 동시 작업에 있어 상호배제를 달성하기 위한 방법입니다.  
+  - Mutex : 뮤텍스 키를 갖고 객체에 접근할 수 있으며 이때, 키는 1개이므로 동시에 1개의 (스레드, 프로세스)만 공유자원에 대해 접근할 수 있습니다.   
+  - Semaphore : 공유자원(객체)에 동시에 접근할 수 있는 (스레드, 프로세스)수가 1개 이상으로 정의되며 최대 N개의 (스레드, 프로세스)가 동시 접근이 가능하도록 제한합니다. 세마포어는 동시 접근 가능 개수 제어를 위한 N 값을 가지고 있으며 스레드가 공유자원에 접근 시 N-- 연산을 통해 접근 가능 개수를 줄입니다. 이후 공유자원을 반납했을때 N++ 연산을 수행합니다.   
+
+ <br>
+ 
+ ```
+ // 뮤텍스 락
+ wait(mutex);  // 임계 구역 접근 가능한 key 얻기(대기)
+ 
+ ...
+ Critical Section
+ ...
+ 
+ signal(mutex);   // 공유자원 접근 해제 시 임계 구역 접근을 위한 key 반납 Lock 해제
+ 
+ 
+ // 세마포어
+ class semaphore {
+   int count;
+ }
+ 
+ void wait(semaphore s){
+   while(s.count <= 0){
+   }
+   s.count--;
+ }
+ 
+ void signal(semaphore s){
+   s.count++;
+   
+ }
+
+ ```
   
+ <br>
+ <br>
+ 
+ ### 스케줄러  
+  #### Scheduler : 실행할 프로세스를 선택 및 관리하는 특수한 시스템 소프트웨어  
+  - 운영체제(OS)가 프로세스 스케줄링을 하기 위한 3가지 Queue : Job Queue, Ready Queue, Device Queue   
+  - Job Queue: 현재 시스템에 있는 모든 프로세스가 들어있는 Queue   
+  - Ready Queue: 현재 메모리에 올라와 있으면서 실행되기 기다리는 프로세스가 대기하는 Queue   
+  - Device Queue: Device I/O 작업을 대기하고 있는 프로세스가 들어있는 Queue  
+  
+  <br>
+  
+  <img src="./images/scheduler.png" width="70%">     
+  
+  a. new -> Ready : 프로세스 생성, 디스크(Job Queue) -> 메모리(Ready Queue)      
+  b. ready -> running : 단기 스케줄러에 의해 프로세스가 CPU에 할당    
+  c-1. running -> ready : Time out 인터럽트 발생으로 할당되었던 프로세스가 Ready Queue로 돌아옴   
+  c-2. running -> blocked : 외부 I/O 작업으로 인해 Ready Queue가 아닌 Blocked 상태로 들어가서 스스로 나올 수 없고 I/O 작업이 완료 된 후 Ready Queue로 복귀 가능   
+  c-3. running -> terminated : 프로세스 작업이 끝나서(프로세스 종료) 메모리에서 해제되는 상태    
+  d-1. blocked, ready -> suspended(중지) : 중기 스케줄러에 의해 메모리에서 디스크로 프로세스가 Swap out 되는 것(Blocked 프로세스를 우선적으로 Swap out)   
+  d-2. suspended -> blocked, ready : 디스크에서 메모리로 프로세스가 Swap In 되는 것     
+  e. blocked -> ready : Block 되었던 프로세스의 I/O 작업이 끝나서 Ready Queue로 이동하여 실행을 대기하는 상태     
+  f. running mode : user mode(일반 명령어 실행 등), kernel mode(시스템 콜, 슈퍼바이저 콜 등 커널의 명령어 수행과 같은 작업 필요 시)    
+  
+  <br>
+  
+  
+  장기 스케줄러(Long-term Scheduler) : Disk -> Memory   
+  - 메모리(RAM)과 디스크 사이 스케줄링을 담당합니다.    
+  - '작업 스케줄러'라고도 불립니다.   
+  - 디스크로부터 프로세스를 메모리에 올려 Ready 상태로 대기할 프로세스를 선택하여 Ready Queue로 보내는 역할   
+  - 메모리에 너무 많은 프로세스가 올라가있으면 성능 저하 및 메모리 낭비가 발생하고 너무 적은 프로세스가 올라가 있으면 디스크로부터 메모리로 매번 프로세스를 올리는 과정 오버헤드가 발생  
+  - new(프로세스 생성) -> Ready  
+  - 중요!! 현대 Time Sharing 시스템에서는 장기 스케줄러는 거의 사용되지 않습니다.   
+  > 과거 메모리가 부족한 시절 장기 스케줄러를 통해 디스크와 메모리 사이 스케줄링을 통해 메모리에 올라가서 Ready Queue에 담길 프로세스를 선택했지만, 현대에는 프로세스가 시작되면 바로 메모리에 올라가 Ready Queue에 담기게 됩니다. 또한, 부족한 메모리의 경우 가상메모리를 활용할 수 있습니다.   
+  
+  <br>
+  
+  중기 스케줄러(Mid-term Scheduler) : Memory -> Disk   
+  - 메모리와 디스크 사이 스케줄링을 담당합니다.  
+  - 메인 메모리(RAM)이 여유공간 마련을 위해 프로세스를 디스크로 내려보내는 역할   
+  - 메모리에 할당된 프로세스를 해제하여 메모리 공간을 확보합니다.   
+  - Ready -> Suspended, Waiting -> Suspended     
+ 
+  <br>
+  
+  단기 스케줄러(Short-term Scheduler) : Memory -> CPU   
+  - CPU(중앙처리장치)와 메모리 사이 스케줄링을 담당합니다.   
+  - Ready Queue에 있는 프로세스 중 어떤 프로세스를 Running 상태로 올릴지 결정하는 역할   
+  - 프로세스를 CPU에 할당(Dispatch)  
+  - Ready -> Running -> Waiting(Blocked) or Ready -> Running -> Terminated    
+  - 디스패처는 단기 스케줄러에 의해 선택된 프로세스를 CPU에 할당하는 역할을 합니다.   
+ 
+  <br>
+  
+  > Blocked : 다른 I/O 작업으로 인해 대기하는 상태 -> 스스로 Ready Queue로 올라갈 수 없고 I/O 작업이 완료되어야 Ready Queue로 갈 수 있다.    
+  > Running -> Ready : Time Sharing 시스템에서 Time Out으로 인해 인터럽트가 발생하여 Ruuning 중인 프로세스가 Ready Queue로 돌아가는 것    
+
+  <br>
+  <br>
+  
+  ### 동기 & 비동기   
+   #### Synchronize & Asynchronize  
+   - 동기 뜻 : 동시에 일어난다, 요청한 결과가 한 자리에서 모두 일어난다.   
+   - 비동기 뜻 : 동시에 일어나지 않는다, 요청과 결과가 동시에 한 자리에서 일어나지 않는다.   
+   - 동기 : 요청에 대한 결과가 주어질때까지 대기해야 합니다.  
+   - 비동기 : 요청에 대한 결과와는 상관없이 다음 작업을 수행하며 결과는 따로 발생합니다. 병렬적인 작업 실행의 특성이 있다.    
+
+  <br>
+  
+  비동기 예시
+  동기 예시
+  
+  
+  동기 활용 프로그램 예 : 
+  비동기 활용 프로그램 예 : Vue Axios 
   
