@@ -213,14 +213,75 @@
    - 동기 뜻 : 동시에 일어난다, 요청한 결과가 한 자리에서 모두 일어난다.   
    - 비동기 뜻 : 동시에 일어나지 않는다, 요청과 결과가 동시에 한 자리에서 일어나지 않는다.   
    - 동기 : 요청에 대한 결과가 주어질때까지 대기해야 합니다.  
-   - 비동기 : 요청에 대한 결과와는 상관없이 다음 작업을 수행하며 결과는 따로 발생합니다. 병렬적인 작업 실행의 특성이 있다.    
+   - 비동기 : 요청에 대한 결과와는 상관없이 다음 작업을 수행하며 결과는 따로 발생합니다. 병렬적인 작업 수행의 특성이 있다.    
 
   <br>
   
-  비동기 예시
-  동기 예시
+  <img src="./images/sync.png" width="50%">
   
+  > 비동기 : A -> B 작업 순서로 있을 때 A 작업이 끝날 때까지 B 작업은 실행되지 못하고 블로킹되어 A 작업이 끝날 때까지 대기한다. 프로세스 디자인이 간단한 장점이 있고 필요에 따라 동기적인 작업이 필요할 수 있다. 하지만 작업의 결과가 나올 때까지 Block되는 단점이 있습니다.  
+  > 동기 : A -> B 작업이 순서대로 주어질 때 A 작업이 시작되고 B 작업도 바로 실행될 수 있으며 A, B 작업의 결과와 상관없이 다음 작업으로 넘어가게 됩니다. 비동기 로직 구현은 동기보다 복잡할 수 있지만 잘 활용한다면 효율적인 작업처리를 구현할 수 있습니다.   
   
-  동기 활용 프로그램 예 : 
-  비동기 활용 프로그램 예 : Vue Axios 
+  <br>
+  비동기 작업 예시 : DOM 이벤트, Timer함수(setInterval), [ Ajax, Axios ] 등 비동기 통신 요청, Async 함수 호출
+  동기 작업 예시 : 일반적인 함수 호출
   
+  <br>
+  
+  ```
+  // 동기
+  static void A(){
+    System.out.print("A ");
+    B();
+  }
+  
+  static void B(){
+    System.out.print("B ");
+    C();
+  }
+  
+  static void C(){
+    System.out.print("C ");
+  }
+  
+  A();
+  
+  -> A B C 
+  
+  // 비동기 (In Spring Framework)
+  @Async
+  static void A(){
+    Thread.sleep(1000);
+    System.out.print("A ");
+  }
+  
+  @Async
+  static void B(){
+    System.out.print("B ");
+  }
+  
+  @Async
+  static void C(){
+    System.out.print("C ");
+  }
+  
+  A();
+  B();
+  C();
+  
+  -> B C A 
+  
+  ```
+  
+  <br>
+  
+  * 블로킹과 논블로킹 & 동기, 비동기 관계 추후 정리   
+
+  <br>
+  <br>
+  
+  ### 프로세스 동기화   
+   #### Process Synchroninization   
+   - 프로세스 사이 데이터나 상태를 동기화(Sync)하는 것을 의미합니다. 현대에는 스레드 기준으로 Thread Synchronization으로도 불립니다.   
+
+
