@@ -322,7 +322,9 @@
   ```
   <br>
   
-  <img src="./images/semaphore.png" width="60%">   
+  세마포를 포함한 HW 및 OS 프로세스 스케줄링 구조   
+  <img src="./images/semaphore.png" width="60%">    
+  
   > Job Queue: 현재 시스템에 있는 모든 프로세스가 들어있는 Queue   
   > Ready Queue: 현재 메모리에 올라와 있으면서 실행되기 기다리는 프로세스가 대기하는 Queue   
   > Device Queue: Device I/O 작업을 대기하고 있는 프로세스가 들어있는 Queue  
