@@ -282,6 +282,71 @@
   
   ### 프로세스 동기화   
    #### Process Synchroninization   
-   - 프로세스 사이 데이터나 상태를 동기화(Sync)하는 것을 의미합니다. 현대에는 스레드 기준으로 Thread Synchronization으로도 불립니다.   
+   - 프로세스 사이 데이터나 상태를 동기화(Sync)하는 것을 의미합니다. 현대에는 스레드 기준으로 Thread Synchronization으로도 불립니다.    
+   - 프로세스 동기화의 목적 : 공유하는 자원에 대한 일관성을 유지함으로써 서로 다른 결과를 만들지 않도록 하기 위해서 입니다.    
+  
+  > 다중 스레드 환경에서 공통 자원(객체, 데이터)에 접근하는 스레드는 하나만 존재하도록 관리해야 한다.   
+  > 공통 자원이 Read-Only 일 때는 객체가 수정되지 않기에 여러 스레드가 동시 접근하여도 문제가 발생하지 않지만 객체의 상태나 변수 값이 변경되는 경우에 여러 스레드가 동시에 접근할 경우 데이터 일관성이 깨지게 되므로 하나의 스레드씩 접근할 수 있도록 제어가 필요합니다.   
+  
+  > Java 언어에서의 동기화 활용 예시   
+  ▶️ [Singleton 내용](../../6.%20Design%20Pattern/jinu/README.md#싱글톤singleton)   
+ 
+  <br> 
+  
+  __동기화 방식 중 세마포__   
+  - 대표적인 동기화 기법으로 P, V로 불리기도 하였으며 P(acquire(), 공통 자원 접근), V(release(), 자원 사용 해제) 로 나뉩니다.   
+  
+  -> 세마포의 구조 (by Java)  
+  ```
+  class Semaphore {
+    int value;      // 허용되는 동시 접근 스레드 개수 제한  
+    Semaphore(int value) {
+      // ...                   // 공통 자원 
+    }
+    void acquire() {
+      value--;
+      if (value < 0) {
+        // 요청 스레드를 대기 큐에 담는다.  
+        // 스레드는 block 되어 대기한다.   
+      }
+    }
+    void release() {
+      value++;
+      if (value <= 0) {         // 큐에 대기중인 스레드가 있다는 뜻 -> 대기중인 스레드 하나를 공통 자원에 접근토록 해야한다.  
+        // 큐에서 스레드를 하나 꺼낸다.
+        // 해당 스레드를 Wake up 후 임계 구역 진입을 허가한다.  
+      }
+    }
+  }
+  
+  ```
+  <br>
+  
+  <img src="./images/semaphore.png" width="60%">   
+  > Job Queue: 현재 시스템에 있는 모든 프로세스가 들어있는 Queue   
+  > Ready Queue: 현재 메모리에 올라와 있으면서 실행되기 기다리는 프로세스가 대기하는 Queue   
+  > Device Queue: Device I/O 작업을 대기하고 있는 프로세스가 들어있는 Queue  
+  
+  - Ready Queue에 실행중인 프로세스가 큐에 담겨서 대기합니다.    
+  - CPU(중앙 처리 장치)에서 Ready Queue에서 프로세스를 하나씩 가져와서 작업을 처리합니다.   
+  - 이때, 할당된 시간동안 작업을 마치지 못하면 Time out Interrupt로 인해 다시 Ready Queue로 돌아가서 자신의 작업 순서를 기다리게 됩니다.   
+  - 만약, 작업 중 I/O 작업으로 인해 프로세스 작업이 Block되면 Device Queue에 프로세스가 실리고 I/O 작업이 끝나면 Ready Queue로 돌아가게 됩니다.  
+  - 작업 중 임계 구역(공통 자원)에 접근해야 할 때는 Semaphore 기법 사용 시 acquire()를 호출하여 S value 값에 따라 Semaphore Queue에 대기하거나 Ready Queue로 바로 가서 대기하게 됩니다.  
+  - Semaphore의 --value >= 0 일 때는 공통 자원에 대한 접근이 허용되므로 바로 Ready Queue로 들어가서 작업을 대기합니다.
+  - Semaphore의 --value < 0 일 때는 공통 자원 접근이 제한되므로 Semaphore Queue에 담겨서 자신의 차례가 돌아올 때까지 대기하게 됩니다.   
+  - Semaphore Queue에 대기중인 프로세스는 타 프로세스(스레드)가 공통 자원을 사용 후 반납할 때 value++ 가 발생하므로 이때 value를 검사하여 value < 1(대기 프로세스 존재 시) 일 때, Semaphore Queue의 프로세스가 Ready Queue로 들어가게 됩니다.   
+  - 즉, 프로세스(스레드)가 공통 자원에 들어가도 문제가 되지 않을 때 Ready Queue에 담기게 됩니다.   
 
+  <br> 
+  
+  임계 구역(Critical Section) 문제 해결 조건   
+  1. 상호 배제 : 각 프로세스(스레드)는 동시에 임계 구역 접근 불가    
+  2. 진행 : 임계 구역에 진입 가능   
+  3. 한정된 대기 : 반드시 한번은 CS 구역에 접근하도록 보장    
 
+  <br>   
+  
+  바쁜 대기(Busy Waiting)란?   
+  
+  
+  
